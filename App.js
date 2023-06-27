@@ -9,7 +9,7 @@ import styled from "styled-components/native";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
-
+import { SignInScreen } from "./src/features/screens/SignInScree.js/SignInScreen";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
@@ -68,7 +68,7 @@ export default function App() {
           >
             <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
             <Tab.Screen name="Map" component={Map} />
-            <Tab.Screen name="Settings" component={Settings} />
+            <Tab.Screen name="Settings" component={SignInScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
