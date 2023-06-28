@@ -1,10 +1,12 @@
-import React from 'react'
-import { View } from 'react-native'
+import React from "react";
+import { View, Text } from "react-native";
 
 const RatingFilter = () => {
   return (
-    <View>RatingFilter</View>
-  )
-}
+    <View>
+      <Text>RatingFilter</Text>
+    </View>
+  );
+};
 
-export default RatingFilter
+export default RatingFilter;

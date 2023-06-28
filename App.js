@@ -10,6 +10,7 @@ import { SafeArea } from "./src/components/utility/safe-area.component";
 
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
 import DistanceSlider from "./src/features/homepage/DistanceSlider";
+import FilterBar from "./src/features/homepage/FilterBar";
 
 const Tab = createBottomTabNavigator();
 
@@ -52,6 +53,7 @@ const theme = {
 export default function App() {
   return (
     <>
+    <FilterBar/>
       <ThemeProvider theme={theme}>
         <DistanceSlider/>
         <NavigationContainer>
@@ -68,7 +70,7 @@ export default function App() {
               },
             })}
           >
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+            {/* <Tab.Screen name="Restaurants" component={RestaurantsScreen} /> */}
             <Tab.Screen name="Map" component={Map} />
             <Tab.Screen name="Settings" component={Settings} />
           </Tab.Navigator>
