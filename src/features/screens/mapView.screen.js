@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ActivityIndicator, Button, View } from 'react-native';
+import { Searchbar } from 'react-native-paper';
+import {
+    StyleSheet,
+    ActivityIndicator,
+    Button,
+    View,
+    StatusBar,
+    FlatList,
+    SafeAreaView,
+    Text,
+    Alert,
+} from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE, Circle } from 'react-native-maps';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { GOOGLE_MAPS_API_KEY } from '@env';
+import styled from 'styled-components/native';
+import { Spacer } from '../../components/spacers/spacer.component';
 
 export default function MapScreen() {
     const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [listView, setListView] = useState(false);
     const radius = 5 * 1609;
-
+    //GET USERS LOCATION
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+                Alert.alert('Permission to access location was denied');
                 return;
             }
 
@@ -31,6 +44,7 @@ export default function MapScreen() {
         })();
     }, []);
 
+    //MAKE GET REQUEST TO GOOGLE PLACES API WITH USERS LOCATION
     useEffect(() => {
         if (location) {
             const apiKey = GOOGLE_MAPS_API_KEY;
@@ -42,11 +56,12 @@ export default function MapScreen() {
                     setRestaurants(response.data.results);
                 })
                 .catch((error) => {
-                    setErrorMsg('Error fetching restaurant data:', error);
+                    Alert.alert('Error fetching restaurant data:', error);
                 });
         }
     }, [location]);
 
+    //UPDATE USER LOCATION SO IT DOESN'T AUTOMATICALLY DRAIN BATTERY LIFE
     const handlePress = async () => {
         setLoading(true);
         try {
@@ -60,8 +75,6 @@ export default function MapScreen() {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
-            // Instead of setting the restaurants to the location, fetch the restaurants
-            // based on the updated location.
             const apiKey = GOOGLE_MAPS_API_KEY;
             const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=restaurant&key=${apiKey}`;
 
@@ -71,13 +84,18 @@ export default function MapScreen() {
                     setRestaurants(response.data.results);
                 })
                 .catch((error) => {
-                    setErrorMsg('Error fetching restaurant data:', error);
+                    Alert.alert('Error fetching restaurant data:', error);
                 });
         } catch (error) {
-            setErrorMsg('Error getting location:', error);
+            Alert.alert('Error getting location:', error);
         } finally {
             setLoading(false);
         }
+    };
+
+    //CHANGE STATE FROM MAP VIEW TO LIST VIEW
+    const handleListView = () => {
+        setListView((prevListView) => !prevListView);
     };
 
     if (!location || loading) {
@@ -85,7 +103,51 @@ export default function MapScreen() {
             <ActivityIndicator style={styles.loadingContainer} size="large" />
         );
     }
+    if (listView) {
+        const SafeArea = styled(SafeAreaView)`
+            flex: 1;
+            ${StatusBar.currentHeight &&
+            `margin-top: ${StatusBar.currentHeight}px`};
+        `;
 
+        const SearchContainer = styled(View)`
+            padding: 13px;
+        `;
+
+        const RestaurantList = styled(FlatList).attrs({
+            contentContainerStyle: {
+                padding: 16,
+            },
+        })``;
+        const RestaurantItem = styled(Text)`
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        `;
+        //LIST VIEW STATE
+        return (
+            <SafeArea>
+                <SearchContainer>
+                    <Searchbar />
+                </SearchContainer>
+                <RestaurantList
+                    data={restaurants}
+                    renderItem={({ item }) => (
+                        <Spacer position="bottom" size="large">
+                            <RestaurantItem key={item.place_id}>
+                                {item.name}
+                            </RestaurantItem>
+                        </Spacer>
+                    )}
+                    keyExtractor={(item) => item.place_id}
+                />
+                <View style={styles.listViewButton}>
+                    <Button title="Map View" onPress={handleListView} />
+                </View>
+            </SafeArea>
+        );
+    }
+    //MAP VIEW STATE
     return (
         <View style={styles.container}>
             {loading ? (
@@ -125,8 +187,11 @@ export default function MapScreen() {
                 </MapView>
             ) : null}
 
-            <View style={styles.buttonContainer}>
+            <View style={styles.updateLocationButton}>
                 <Button title="Get Current Location" onPress={handlePress} />
+            </View>
+            <View style={styles.listViewButton}>
+                <Button title="List View" onPress={handleListView} />
             </View>
         </View>
     );
@@ -141,22 +206,21 @@ const styles = StyleSheet.create({
     map: {
         ...StyleSheet.absoluteFillObject,
     },
-    buttonContainer: {
+    updateLocationButton: {
         position: 'absolute',
-        top: '10%',
+        top: '5%',
         alignSelf: 'center',
-        // backgroundColor: '#e1e1ea',
         backgroundColor: '#99ccff',
-        borderRadius: 10, // Adjust the value to control the roundness of the corners
+        borderRadius: 10,
         padding: 10,
-        shadowColor: 'rgba(0, 0, 0, 0.3)', // Lightly colored shadow
-        shadowOpacity: 0.5, // Adjust the opacity for desired effect
-        shadowRadius: 3, // Adjust the radius for desired effect
+        shadowColor: 'rgba(0, 0, 0, 0.3)',
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        elevation: 3, // For Android shadow effect
+        elevation: 3,
     },
     loadingContainer: {
         flex: 1,
@@ -169,5 +233,21 @@ const styles = StyleSheet.create({
         bottom: 0,
         opacity: '50%',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    listViewButton: {
+        position: 'absolute',
+        bottom: '5%',
+        alignSelf: 'center',
+        backgroundColor: '#99ccff',
+        borderRadius: 10,
+        padding: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.3)',
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 3,
     },
 });
