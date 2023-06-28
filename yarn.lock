@@ -2023,15 +2023,15 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@types/hammerjs@^2.0.36":
-  "integrity" "sha512-ewXv/ceBaJprikMcxCmWU1FKyMAQ2X7a9Gtmzw8fcg2kIePI1crERDM818W+XYrxqdBBOdlf2rm137bU+BltCA=="
-  "resolved" "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.41.tgz"
-  "version" "2.0.41"
-
 "@types/geojson@^7946.0.8":
   "integrity" "sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA=="
   "resolved" "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.10.tgz"
   "version" "7946.0.10"
+
+"@types/hammerjs@^2.0.36":
+  "integrity" "sha512-ewXv/ceBaJprikMcxCmWU1FKyMAQ2X7a9Gtmzw8fcg2kIePI1crERDM818W+XYrxqdBBOdlf2rm137bU+BltCA=="
+  "resolved" "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.41.tgz"
+  "version" "2.0.41"
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   "integrity" "sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g=="
@@ -3819,11 +3819,6 @@
   "integrity" "sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw=="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
-
-"fsevents@^2.3.2", "fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
@@ -6093,6 +6088,13 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
+"react-native-dotenv@^3.4.9":
+  "integrity" "sha512-dbyd+mcy7SUzxEgmt33TRf1FGcNe6swJhXmB0unKkI49F7+pidog9kPtjxMLTAfmKA8gcN2XHQSKltGfGbGCLQ=="
+  "resolved" "https://registry.npmjs.org/react-native-dotenv/-/react-native-dotenv-3.4.9.tgz"
+  "version" "3.4.9"
+  dependencies:
+    "dotenv" "^16.3.1"
+
 "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-rr+XwVzXAVpY8co25ukvyI38fKCxTQjz7WajeZktl8qUPdh1twnSExgpT47DqDi4n+m+OiJPAnHfZOkqqAQMOg=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.12.0.tgz"
@@ -6103,13 +6105,6 @@
     "invariant" "^2.2.4"
     "lodash" "^4.17.21"
     "prop-types" "^15.7.2"
-
-"react-native-dotenv@^3.4.9":
-  "integrity" "sha512-dbyd+mcy7SUzxEgmt33TRf1FGcNe6swJhXmB0unKkI49F7+pidog9kPtjxMLTAfmKA8gcN2XHQSKltGfGbGCLQ=="
-  "resolved" "https://registry.npmjs.org/react-native-dotenv/-/react-native-dotenv-3.4.9.tgz"
-  "version" "3.4.9"
-  dependencies:
-    "dotenv" "^16.3.1"
 
 "react-native-gradle-plugin@^0.71.18":
   "integrity" "sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ=="
@@ -6123,14 +6118,13 @@
   dependencies:
     "@types/geojson" "^7946.0.8"
 
-"react-native-paper@^5.8.0":
+"react-native-paper@^5.9.0":
   "integrity" "sha512-yPiZLESdyyipw8o6RAw5yAijcQye2ALMu2tA5ZqXyhIQ0lQNOYTQRnSrcSD+c/Dj/aCpV4utJrcQveBnK7VlFw=="
   "resolved" "https://registry.npmjs.org/react-native-paper/-/react-native-paper-5.9.0.tgz"
   "version" "5.9.0"
   dependencies:
     "@callstack/react-theme-provider" "^3.0.8"
     "color" "^3.1.2"
-    "patch-package" "^7.0.0"
     "patch-package" "^7.0.0"
     "use-latest-callback" "^0.1.5"
 

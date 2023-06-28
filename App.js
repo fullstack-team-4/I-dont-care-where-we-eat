@@ -9,7 +9,7 @@ import styled from 'styled-components/native';
 import { SafeArea } from './src/components/utility/safe-area.component';
 
 import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
-// import DistanceSlider from './src/features/homepage/DistanceSlider';
+import DistanceSlider from './src/features/homepage/DistanceSlider';
 import MapScreen from './src/features/screens/mapView.screen';
 
 import RandomButton from './src/features/homepage/randomButton';
@@ -82,10 +82,10 @@ export default function App() {
                                 display: 'flex',
                             },
                         })}>
-                        {/* <Tab.Screen
+                        <Tab.Screen
                             name="Restaurants"
                             component={RestaurantsScreen}
-                        /> */}
+                        />
                         <Tab.Screen name="Map" component={MapScreen} />
                         <Tab.Screen name="Settings" component={Settings} />
                     </Tab.Navigator>

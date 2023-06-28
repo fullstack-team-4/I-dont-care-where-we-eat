@@ -1,13 +1,12 @@
-import React from 'react'
-import { View ,Text} from 'react-native'
-
+import React from "react";
+import { View, Text } from "react-native";
 
 const PriceFilter = () => {
   return (
     <View>
-        <Text>Price Filter</Text>
+      <Text>Price Filter</Text>
     </View>
-  )
-}
+  );
+};
 
-export default PriceFilter
+export default PriceFilter;
