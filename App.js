@@ -11,6 +11,7 @@ import { SafeArea } from "./src/components/utility/safe-area.component";
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
 import DistanceSlider from "./src/features/homepage/DistanceSlider";
 import FilterBar from "./src/features/homepage/FilterBar";
+import { PaperProvider } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,6 @@ const Map = () => (
     <Text> Map</Text>
   </SafeArea>
 );
-
 
 const theme = {
   colors: {
@@ -53,9 +53,11 @@ const theme = {
 export default function App() {
   return (
     <>
-    <FilterBar/>
+      <PaperProvider>
+        <FilterBar />
+      </PaperProvider>
       <ThemeProvider theme={theme}>
-        <DistanceSlider/>
+        <DistanceSlider />
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
