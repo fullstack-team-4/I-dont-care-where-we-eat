@@ -9,31 +9,32 @@ import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
+import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
+import { useNavigation } from "@react-navigation/native";
+
 export const SignInScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { height } = useWindowDimensions();
+  const navigation = useNavigation();
 
   const onSignInPressed = () => {
-    console.warn("Sign in");
+    
+    //validate user
+
+    navigation.navigate('Home')
   };
 
   const onForgotPasswordPressed = () => {
-    console.warn("Forgot Password");
+    
+
+    navigation.navigate("ForgotPassword")
   };
 
-  const onSignInFacebook = () => {
-    console.warn("facebook");
-  };
-  const onSignInGoogle = () => {
-    console.warn("Google");
-  };
-  const onSignInApple = () => {
-    console.warn("Apple");
-  };
-  const onSignUpPress = () => {
-    console.warn("onSignOnPress");
+  
+  const onSignUpPressed = () => {
+    navigation.navigate("SignUp");
   };
   return (
     <View style={styles.root}>
@@ -59,27 +60,10 @@ export const SignInScreen = () => {
         onPress={onForgotPasswordPressed}
         type="TERTIARY"
       />
-      <CustomButton
-        text="Sign In with Facebook"
-        onPress={onSignInFacebook}
-        bgColor="#E7EAF4"
-        fgColor="#4765A9"
-      />
-      <CustomButton
-        text="Sign In with Google"
-        onPress={onSignInGoogle}
-        bgColor="#FAE9EA"
-        fgColor="#DD4D44"
-      />
-      <CustomButton
-        text="Sign In with Apple"
-        onPress={onSignInApple}
-        bgColor="#e3e3e3"
-        fgColor="#363636"
-      />
+      <SocialSignInButtons/>
       <CustomButton
         text="Don't have an account? Create One "
-        onPress={onForgotPasswordPressed}
+        onPress={onSignUpPressed}
         type="TERTIARY"
       />
     </View>

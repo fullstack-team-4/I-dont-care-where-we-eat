@@ -9,7 +9,14 @@ import styled from "styled-components/native";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
-import { SignInScreen } from "./src/features/screens/SignInScree.js/SignInScreen";
+import { SignInScreen } from "./src/features/screens/SignInScreen/SignInScreen";
+import { MapScreen } from "./src/features/screens/map/MapScreen";
+import { SignUpScreen } from "./src/features/screens/SignUpScreen/SignUpScreen";
+import { ConfirmEmailScreen } from "./src/features/screens/ConfirmEmailScreen/ConfirmEmailScreen";
+import { ForgotPasswordScreen } from "./src/features/screens/ForgotPasswordScreen/ForgotPasswordScreen";
+import { NewPasswordScreen } from "./src/features/screens/NewPasswordScreen/NewPasswordScreen";
+import { Navigation } from "./src/features/navigation/Navigation";
+
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
@@ -28,7 +35,6 @@ const Map = () => (
     <Text> Map</Text>
   </SafeArea>
 );
-
 
 const theme = {
   colors: {
@@ -52,7 +58,10 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
+
+      <Navigation/>
+
+        {/* <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
               tabBarIcon: ({ size, color }) => {
@@ -66,11 +75,11 @@ export default function App() {
               },
             })}
           >
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+            <Tab.Screen name="Restaurants" component={SignInScreen} />
             <Tab.Screen name="Map" component={Map} />
-            <Tab.Screen name="Settings" component={SignInScreen} />
+            <Tab.Screen name="Settings" component={ConfirmEmailScreen} />
           </Tab.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
