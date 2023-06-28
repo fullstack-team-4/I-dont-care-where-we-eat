@@ -12,6 +12,7 @@
     "@babel/preset-env": "^7.1.6",
     "@react-native-community/slider": "^4.4.2",
     "@react-navigation/bottom-tabs": "^6.5.8",
+    "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.7",
     "add": "^2.0.6",
     "expo": "~48.0.18",
