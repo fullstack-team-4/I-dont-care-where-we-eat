@@ -68,7 +68,7 @@ export default function App() {
               },
             })}
           >
-            {/* <Tab.Screen name="Restaurants" component={RestaurantsScreen} /> */}
+            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
             <Tab.Screen name="Map" component={Map} />
             <Tab.Screen name="Settings" component={Settings} />
           </Tab.Navigator>
