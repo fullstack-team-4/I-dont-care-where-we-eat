@@ -12,6 +12,9 @@ import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
 import DistanceSlider from './src/features/homepage/DistanceSlider';
 import MapScreen from './src/features/screens/mapView.screen';
 
+import RandomButton from './src/features/homepage/randomButton';
+
+
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
@@ -54,6 +57,7 @@ export default function App() {
         <>
             <ThemeProvider theme={theme}>
                 <DistanceSlider />
+                <RandomButton onPress={() => console.log('boop')} />
                 <NavigationContainer>
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
