@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ActivityIndicator, Button, View } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE, Circle } from 'react-native-maps';
 import * as Location from 'expo-location';
 import axios from 'axios';
-// import { GOOGLE_MAPS_API_KEY } from '@env';
+import { GOOGLE_MAPS_API_KEY } from '@env';
 
 export default function MapScreen() {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
+    const radius = 5 * 1609;
 
     useEffect(() => {
         (async () => {
@@ -32,8 +33,8 @@ export default function MapScreen() {
 
     useEffect(() => {
         if (location) {
-            const apiKey = 'AIzaSyBjk28YzUKy6zhvDScrJjXevkWln1_voYo';
-            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=8000&type=restaurant&key=${apiKey}`;
+            const apiKey = GOOGLE_MAPS_API_KEY;
+            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.latitude},${location.longitude}&radius=${radius}&type=restaurant&key=${apiKey}`;
 
             axios
                 .get(url)
@@ -61,8 +62,8 @@ export default function MapScreen() {
             });
             // Instead of setting the restaurants to the location, fetch the restaurants
             // based on the updated location.
-            const apiKey = 'AIzaSyBjk28YzUKy6zhvDScrJjXevkWln1_voYo';
-            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=8000&type=restaurant&key=${apiKey}`;
+            const apiKey = GOOGLE_MAPS_API_KEY;
+            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=restaurant&key=${apiKey}`;
 
             axios
                 .get(url)
@@ -97,11 +98,19 @@ export default function MapScreen() {
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
                     region={location}>
+                    <Circle
+                        center={location}
+                        radius={radius}
+                        strokeColor="#0084ff"
+                        fillColor="rgba(102,204,255,0.3)"
+                        strokeWidth={2}
+                    />
                     <Marker
                         title="me"
                         coordinate={location}
                         pinColor="#0066ff"
                     />
+
                     {restaurants.map((restaurant) => (
                         <Marker
                             key={restaurant.place_id}
