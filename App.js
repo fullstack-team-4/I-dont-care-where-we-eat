@@ -14,6 +14,8 @@ import MapScreen from './src/features/screens/mapView.screen';
 
 import RandomButton from './src/features/homepage/randomButton';
 
+import FilterBar from "./src/features/homepage/FilterBar";
+import { PaperProvider } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -55,8 +57,11 @@ const theme = {
 export default function App() {
     return (
         <>
+      <PaperProvider>
+        <FilterBar />
+      </PaperProvider>
             <ThemeProvider theme={theme}>
-                <DistanceSlider />
+                <DistanceSlider  />
                 <RandomButton onPress={() => console.log('boop')} />
                 <NavigationContainer>
                     <Tab.Navigator
