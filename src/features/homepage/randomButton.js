@@ -29,8 +29,8 @@ const RandomButton = ({ onPress }) => {
                         radius: 1000,
                         type: 'restaurant',
                         key: 'AIzaSyAJY4PiiBXtUQfOJHVkPpQj1twUacZk6Lo',
-                    },
-                }
+                    }, 
+                }, console.log(response)
             );
 
             const randomIndex = Math.floor(Math.random() * response.data.results.length);
