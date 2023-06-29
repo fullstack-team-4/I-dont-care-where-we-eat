@@ -11,6 +11,7 @@ import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from "react-hook-form";
 
 export const SignInScreen = () => {
   const [username, setUsername] = useState("");
@@ -19,20 +20,19 @@ export const SignInScreen = () => {
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
 
-  const onSignInPressed = () => {
-    
+  const { control, handleSubmit, formState:{errors} } = useForm();
+  
+
+  const onSignInPressed = data => {
     //validate user
 
-    navigation.navigate('Home')
+    navigation.navigate("Home");
   };
 
   const onForgotPasswordPressed = () => {
-    
-
-    navigation.navigate("ForgotPassword")
+    navigation.navigate("ForgotPassword");
   };
 
-  
   const onSignUpPressed = () => {
     navigation.navigate("SignUp");
   };
@@ -44,23 +44,26 @@ export const SignInScreen = () => {
         resizeMode="contain"
       />
       <CustomInput
+        name="username"
         placeholder="Username"
-        value={username}
-        setValue={setUsername}
+        control= {control}
+        rules={{required:"Username is required"}}
+        
       />
       <CustomInput
         placeholder="Password"
-        value={password}
-        setValue={setPassword}
+        name="password"
+      control ={control}
         secureTextEntry={true}
+        rules={{required:"Password is required"}}
       />
-      <CustomButton text="Sign In" onPress={onSignInPressed} />
+      <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
       <CustomButton
         text="Forgot Password?"
         onPress={onForgotPasswordPressed}
         type="TERTIARY"
       />
-      <SocialSignInButtons/>
+      <SocialSignInButtons />
       <CustomButton
         text="Don't have an account? Create One "
         onPress={onSignUpPressed}
