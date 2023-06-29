@@ -15,6 +15,8 @@ import MapScreen from './src/features/screens/mapView.screen';
 import RandomButton from './src/features/homepage/randomButton';
 import React, { useState, useEffect } from 'react';
 
+import FilterBar from "./src/features/homepage/FilterBar";
+import { PaperProvider } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,9 +69,12 @@ export default function App() {
     }, [randomRestaurant]);
     return (
         <>
+      <PaperProvider>
+        <FilterBar />
+      </PaperProvider>
             <ThemeProvider theme={theme}>
-                <DistanceSlider />
-                <RandomButton onPress={() => handleRandomButtonPress()} />
+                <DistanceSlider  />
+                <RandomButton onPress={() => console.log('boop')} />
                 <NavigationContainer>
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
@@ -89,10 +94,10 @@ export default function App() {
                                 display: 'flex',
                             },
                         })}>
-                        <Tab.Screen
+                        {/* <Tab.Screen
                             name="Restaurants"
                             component={RestaurantsScreen}
-                        />
+                        /> */}
                         <Tab.Screen name="Map" component={MapScreen} />
                         <Tab.Screen name="Settings" component={Settings} />
                     </Tab.Navigator>
