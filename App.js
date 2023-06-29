@@ -82,10 +82,10 @@ export default function App() {
                                 display: 'flex',
                             },
                         })}>
-                        <Tab.Screen
+                        {/* <Tab.Screen
                             name="Restaurants"
                             component={RestaurantsScreen}
-                        />
+                        /> */}
                         <Tab.Screen name="Map" component={MapScreen} />
                         <Tab.Screen name="Settings" component={Settings} />
                     </Tab.Navigator>
