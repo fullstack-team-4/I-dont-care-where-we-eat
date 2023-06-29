@@ -8,12 +8,11 @@ import styled from 'styled-components/native';
 
 import { SafeArea } from './src/components/utility/safe-area.component';
 
-import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
+// import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
 // import DistanceSlider from './src/features/homepage/DistanceSlider';
 import MapScreen from './src/features/screens/mapView.screen';
 
-import RandomButton from './src/features/homepage/randomButton';
-
+// import RandomButton from './src/features/homepage/randomButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,8 +55,8 @@ export default function App() {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <DistanceSlider />
-                <RandomButton onPress={() => console.log('boop')} />
+                {/* <DistanceSlider /> */}
+                {/* <RandomButton onPress={() => console.log('boop')} /> */}
                 <NavigationContainer>
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
@@ -77,10 +76,10 @@ export default function App() {
                                 display: 'flex',
                             },
                         })}>
-                        <Tab.Screen
+                        {/* <Tab.Screen
                             name="Restaurants"
                             component={RestaurantsScreen}
-                        />
+                        /> */}
                         <Tab.Screen name="Map" component={MapScreen} />
                         <Tab.Screen name="Settings" component={Settings} />
                     </Tab.Navigator>
