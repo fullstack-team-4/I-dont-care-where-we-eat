@@ -13,6 +13,7 @@ import DistanceSlider from './src/features/homepage/DistanceSlider';
 import MapScreen from './src/features/screens/mapView.screen';
 
 import RandomButton from './src/features/homepage/randomButton';
+import React, { useState, useEffect } from 'react';
 
 
 const Tab = createBottomTabNavigator();
@@ -53,11 +54,22 @@ const theme = {
 };
 
 export default function App() {
+    const [randomRestaurant, setRandomRestaurant] = useState(null);
+
+    const handleRandomButtonPress = () => {
+        console.log('WHY WONT YOU WORK');
+    };
+
+    useEffect(() => {
+        if (randomRestaurant) {
+            console.log('Random restaurant:', randomRestaurant);
+        }
+    }, [randomRestaurant]);
     return (
         <>
             <ThemeProvider theme={theme}>
                 <DistanceSlider />
-                <RandomButton onPress={() => console.log('boop')} />
+                <RandomButton onPress={() => handleRandomButtonPress()} />
                 <NavigationContainer>
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
