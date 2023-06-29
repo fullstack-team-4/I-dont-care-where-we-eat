@@ -20,7 +20,7 @@ export const ForgotPasswordScreen = () => {
   const navigation = useNavigation();
 
   const onSignInPressed = () => {
-    navigation.navigate("SingIn")
+    navigation.navigate("SignIn")
   };
 
   const onSendPressed = () =>{
