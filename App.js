@@ -13,6 +13,7 @@ import DistanceSlider from './src/features/homepage/DistanceSlider';
 import MapScreen from './src/features/screens/mapView.screen';
 
 import RandomButton from './src/features/homepage/randomButton';
+import React, { useState, useEffect } from 'react';
 
 import FilterBar from "./src/features/homepage/FilterBar";
 import { PaperProvider } from "react-native-paper";
@@ -55,6 +56,17 @@ const theme = {
 };
 
 export default function App() {
+    const [randomRestaurant, setRandomRestaurant] = useState(null);
+
+    const handleRandomButtonPress = () => {
+        console.log('WHY WONT YOU WORK');
+    };
+
+    useEffect(() => {
+        if (randomRestaurant) {
+            console.log('Random restaurant:', randomRestaurant);
+        }
+    }, [randomRestaurant]);
     return (
         <>
       <PaperProvider>
