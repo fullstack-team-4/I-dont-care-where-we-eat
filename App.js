@@ -8,11 +8,14 @@ import styled from 'styled-components/native';
 
 import { SafeArea } from './src/components/utility/safe-area.component';
 
-// import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
-// import DistanceSlider from './src/features/homepage/DistanceSlider';
+import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
+import DistanceSlider from './src/features/homepage/DistanceSlider';
 import MapScreen from './src/features/screens/mapView.screen';
 
-// import RandomButton from './src/features/homepage/randomButton';
+import RandomButton from './src/features/homepage/randomButton';
+
+import FilterBar from "./src/features/homepage/FilterBar";
+import { PaperProvider } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,9 +57,12 @@ const theme = {
 export default function App() {
     return (
         <>
+      <PaperProvider>
+        <FilterBar />
+      </PaperProvider>
             <ThemeProvider theme={theme}>
-                {/* <DistanceSlider /> */}
-                {/* <RandomButton onPress={() => console.log('boop')} /> */}
+                <DistanceSlider  />
+                <RandomButton onPress={() => console.log('boop')} />
                 <NavigationContainer>
                     <Tab.Navigator
                         screenOptions={({ route }) => ({
