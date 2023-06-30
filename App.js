@@ -11,7 +11,8 @@ import DistanceSlider from "./src/features/homepage/DistanceSlider";
 import MapScreen from "./src/features/screens/mapView.screen";
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
 
-import RandomButton from "./src/features/homepage/randomButton";
+import RandomButton from './src/features/homepage/randomButton';
+import React, { useState, useEffect } from 'react';
 
 import { PaperProvider } from "react-native-paper";
 import FilterBar from "./src/features/homepage/FilterBar";
@@ -54,33 +55,54 @@ const theme = {
 };
 
 export default function App() {
-  return (
-    <PaperProvider>
-      <ThemeProvider theme={theme}>
+    const [randomRestaurant, setRandomRestaurant] = useState(null);
+
+    const handleRandomButtonPress = () => {
+        console.log('WHY WONT YOU WORK');
+    };
+
+    useEffect(() => {
+        if (randomRestaurant) {
+            console.log('Random restaurant:', randomRestaurant);
+        }
+    }, [randomRestaurant]);
+    return (
+        <>
+      <PaperProvider>
         <FilterBar />
-        <DistanceSlider />
-        <RandomButton onPress={() => console.log("boop")} />
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ size, color }) => {
-                const iconName = TAB_ICON[route.name];
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-              tabBarStyle: {
-                display: "flex",
-              },
-            })}
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={Settings} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </ThemeProvider>
-      <ExpoStatusBar style="auto" />
-    </PaperProvider>
-  );
+      </PaperProvider>
+            <ThemeProvider theme={theme}>
+                <DistanceSlider  />
+                <RandomButton onPress={() => console.log('boop')} />
+                <NavigationContainer>
+                    <Tab.Navigator
+                        screenOptions={({ route }) => ({
+                            tabBarIcon: ({ size, color }) => {
+                                const iconName = TAB_ICON[route.name];
+                                return (
+                                    <Ionicons
+                                        name={iconName}
+                                        size={size}
+                                        color={color}
+                                    />
+                                );
+                            },
+                            tabBarActiveTintColor: 'tomato',
+                            tabBarInactiveTintColor: 'gray',
+                            tabBarStyle: {
+                                display: 'flex',
+                            },
+                        })}>
+                        {/* <Tab.Screen
+                            name="Restaurants"
+                            component={RestaurantsScreen}
+                        /> */}
+                        <Tab.Screen name="Map" component={MapScreen} />
+                        <Tab.Screen name="Settings" component={Settings} />
+                    </Tab.Navigator>
+                </NavigationContainer>
+            </ThemeProvider>
+            <ExpoStatusBar style="auto" />
+        </>
+    );
 }
