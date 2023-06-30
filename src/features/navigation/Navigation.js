@@ -8,7 +8,7 @@ import { SignUpScreen } from "../screens/SignUpScreen/SignUpScreen";
 import { ConfirmEmailScreen } from "../screens/ConfirmEmailScreen/ConfirmEmailScreen";
 import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen/ForgotPasswordScreen";
 import { NewPasswordScreen } from "../screens/NewPasswordScreen/NewPasswordScreen";
-import { HomeScreen } from "../screens/HomeScreen/HomeScreen";
+import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import { Auth,Hub } from "aws-amplify";
 
 const Stack = createNativeStackNavigator();

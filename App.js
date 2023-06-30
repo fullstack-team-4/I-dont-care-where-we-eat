@@ -57,26 +57,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
 
       <Navigation/>
-
-        {/* <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ size, color }) => {
-                const iconName = TAB_ICON[route.name];
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-              tabBarStyle: {
-                display: "flex",
-              },
-            })}
-          >
-            <Tab.Screen name="Restaurants" component={SignInScreen} />
-            <Tab.Screen name="Map" component={Map} />
-            <Tab.Screen name="Settings" component={ConfirmEmailScreen} />
-          </Tab.Navigator>
-        </NavigationContainer> */}
+  
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

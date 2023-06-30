@@ -1,30 +1,48 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import {Auth} from 'aws-amplify'
+import React from "react";
+import { Text } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
+import styled from "styled-components/native";
+import { SafeArea } from "../../../components/utility/safe-area.component";
+import { SettingsScreen } from "../Settings/SettingsScreen";
+import { RestaurantsScreen } from "../restaurants.screen";
+const Tab = createBottomTabNavigator();
 
-export const  HomeScreen= ()=> {
+const TAB_ICON = {
+  Restaurants: "md-restaurant",
+  Map: "md-map",
+  Settings: "md-settings",
+};
 
-  const signOut =()=>{
-    Auth.signOut();
-  }
-  return (
-    <View>
-      <Text style={{fontSize:24,alignSelf:'center'}}>Home, Sweet Home</Text>
-      <Text 
 
-      onPress={signOut}
-      
-      style={{
-        width:'100%',
-        textAlign:'center',
-        color:'red',
-        marginTop:'auto',
-        marginVertical:20,
-        fontSize:20,
-      }
-      }>
-        Sign Out
-      </Text>
-    </View>
-  )
-}
+
+const Map = () => (
+  <SafeArea>
+    <Text>Map</Text>
+  </SafeArea>
+);
+
+const HomeScreen = () => (
+  <NavigationContainer independent={true}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ size, color }) => {
+          const iconName = TAB_ICON[route.name];
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "tomato",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          display: "flex",
+        },
+      })}
+    >
+      <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+      <Tab.Screen name="Map" component={Map} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  </NavigationContainer>
+);
+
+export default HomeScreen;
