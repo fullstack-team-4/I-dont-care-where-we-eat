@@ -9,11 +9,18 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@aws-amplify/cli": "^12.1.1",
     "@babel/preset-env": "^7.1.6",
+    "@react-native-async-storage/async-storage": "1.17.11",
+    "@react-native-community/netinfo": "9.3.7",
+    "@react-native-picker/picker": "2.4.8",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "add": "^2.0.6",
+    "amazon-cognito-identity-js": "^6.3.1",
+    "aws-amplify": "^5.3.3",
+    "aws-amplify-react-native": "^7.0.2",
     "expo": "~48.0.18",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
