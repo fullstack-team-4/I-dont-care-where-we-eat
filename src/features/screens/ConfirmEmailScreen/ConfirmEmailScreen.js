@@ -4,6 +4,7 @@ import {
   Image,
   useWindowDimensions,
   StyleSheet,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
@@ -11,10 +12,14 @@ import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import {useForm} from 'react-hook-form'
+import {Auth} from "aws-amplify"
+import {useRoute} from '@react-navigation/native'
 
 export const ConfirmEmailScreen = () => {
+  const route = useRoute();
+  const {control, handleSubmit,watch} = useForm({defaultValues:{username:route?.params?.username}});
 
-  const {control, handleSubmit} = useForm();
+  const username= watch('username')
 
 
   const navigation= useNavigation();
@@ -23,16 +28,36 @@ export const ConfirmEmailScreen = () => {
     navigation.navigate("SignIn")
   };
 
-  const onConfirmPressed = data => {
-    console.warn(data);
-    navigation.navigate('Home')
+  const onConfirmPressed = async data => {
+    try{
+    await Auth.confirmSignUp(data.username, data.code)
+      navigation.navigate('SignIn')
+    } catch(e){
+      Alert.alert("Oops", e.message)
+    }
+    
   };
-  const onResendPressed = () => {
-    console.warn("on Resend press");
+  const onResendPressed = async() => {
+    try{
+      await Auth.resendSignUp(username)
+      Alert.alert("Succcess","Code was resent to you email")
+        
+      } catch(e){
+        Alert.alert("Oops", e.message)
+      }
   };
   return (
     <View style={styles.root}>
       <Text style={styles.title}> Confirm Your Email</Text>
+
+      <CustomInput
+          name="username"
+          control={control}
+          placeholder="Username"
+          rules={{
+            required: 'Username code is required',
+          }}
+        />
       <CustomInput
 
       name="code"

@@ -4,6 +4,7 @@ import {
   Image,
   useWindowDimensions,
   StyleSheet,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
@@ -12,7 +13,7 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
 import {useForm}  from 'react-hook-form'
-
+import {Auth} from 'aws-amplify'
 export const ForgotPasswordScreen = () => {
   
   const {control, handleSubmit} = useForm();
@@ -23,9 +24,16 @@ export const ForgotPasswordScreen = () => {
     navigation.navigate("SignIn")
   };
 
-  const onSendPressed = () =>{
-    console.warn(data)
-    navigation.navigate("NewPassword")
+  const onSendPressed = async data =>{
+
+    try {
+      await Auth.forgotPassword(data.username)
+      navigation.navigate("NewPassword",{username})
+    }catch(e){
+      Alert.alert("Oops", e.message)
+    }
+    
+
   }
   return (
     <View style={styles.root}>

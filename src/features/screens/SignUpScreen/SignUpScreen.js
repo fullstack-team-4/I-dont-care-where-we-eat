@@ -4,6 +4,7 @@ import {
   Image,
   useWindowDimensions,
   StyleSheet,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
@@ -12,6 +13,7 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
 import {useForm}  from 'react-hook-form'
+import {Auth} from 'aws-amplify'
 
 const EMAIL_REGEX = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/
 
@@ -21,8 +23,18 @@ export const SignUpScreen = () => {
   
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
-    navigation.navigate('ConfirmEmail')
+  const onRegisterPressed = async(data) => {
+    const {username, password, email,name} = data;
+    try{
+       await Auth.signUp({
+        username,
+        password,
+        attributes:{email,name}
+      });
+      navigation.navigate("ConfirmEmail",{username})
+    }catch(e){
+      Alert.alert('Oops', e.message)
+    }
   };
   const onSignInPressed = () => {
     navigation.navigate('SignIn')
@@ -40,6 +52,23 @@ export const SignUpScreen = () => {
   return (
     <View style={styles.root}>
       <Text style={styles.title}> Create an account</Text>
+
+      <CustomInput
+      name="Name"
+        control={control}
+        placeholder="Name"
+        rules={{
+          required:"Name is required",
+          minLength:{
+            value:3,
+            message:"Username should be at least 3 characters long"
+          },
+          maxLength:{
+            value:24,
+            message:"Username should be max 24 characters long"
+          }
+        }}
+      />
       <CustomInput
       name="username"
         control={control}

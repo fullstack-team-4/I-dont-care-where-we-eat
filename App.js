@@ -10,8 +10,7 @@ import { SafeArea } from "./src/components/utility/safe-area.component";
 
 import { Navigation } from "./src/features/navigation/Navigation";
 
-import {Amplify,Auth }from 'aws-amplify'
-import {withAuthenticator} from "aws-amplify-react-native"
+import {Amplify }from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 
 Amplify.configure(awsconfig)

@@ -4,6 +4,7 @@ import {
   Image,
   useWindowDimensions,
   StyleSheet,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
@@ -12,21 +13,35 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
-
+import { Auth } from "aws-amplify";
 export const SignInScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
 
-  const { control, handleSubmit, formState:{errors} } = useForm();
-  
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onSignInPressed = data => {
-    //validate user
+  const onSignInPressed = async data => {
+    if (loading) {
+      return;
+    }
 
-    navigation.navigate("Home");
+    setLoading(true)
+    try {
+      
+      const response = await Auth.signIn(data.username, data.password);
+    } catch (e) {
+      Alert.alert("Oops", e.message);
+    }
+
+    setLoading(false)
   };
 
   const onForgotPasswordPressed = () => {
@@ -46,18 +61,17 @@ export const SignInScreen = () => {
       <CustomInput
         name="username"
         placeholder="Username"
-        control= {control}
-        rules={{required:"Username is required"}}
-        
+        control={control}
+        rules={{ required: "Username is required" }}
       />
       <CustomInput
         placeholder="Password"
         name="password"
-      control ={control}
+        control={control}
         secureTextEntry={true}
-        rules={{required:"Password is required"}}
+        rules={{ required: "Password is required" }}
       />
-      <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
+      <CustomButton text={loading ? "Loading...":"Sign In"}onPress={handleSubmit(onSignInPressed)} />
       <CustomButton
         text="Forgot Password?"
         onPress={onForgotPasswordPressed}

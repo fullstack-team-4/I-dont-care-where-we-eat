@@ -1,18 +1,16 @@
 import {
   View,
   Text,
-  Image,
-  useWindowDimensions,
+Alert,
   StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
-import Logo from "../../../../assets/favicon.png";
+
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
-import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
-
+import { Auth } from "aws-amplify";
 export const NewPasswordScreen = () => {
   const { control, handleSubmit } = useForm();
 
@@ -22,14 +20,28 @@ export const NewPasswordScreen = () => {
     navigation.navigate("SignIn");
   };
 
-  const onSubmitPressed = (data) => {
-    console.warn(data);
-    navigation.navigate("Home");
+  const onSubmitPressed = async(data) => {
+    try{
+      await Auth.forgotPasswordSubmit(data.username,data.code, data.password);
+      navigation.navigate("SignIn")
+
+    }
+    catch(e){
+      Alert.alert("Oops", e.message)
+    }
+   
   };
 
   return (
     <View style={styles.root}>
       <Text style={styles.title}> Reset your Password</Text>
+      <CustomInput
+        placeholder="Username"
+        name="username"
+        control={control}
+        rules={{ required: "Username is required" }}
+      />
+
       <CustomInput
         placeholder="Code"
         name="code"
