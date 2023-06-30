@@ -16,22 +16,7 @@ import awsconfig from './src/aws-exports'
 Amplify.configure(awsconfig)
 const Tab = createBottomTabNavigator();
 
-const TAB_ICON = {
-  Restaurants: "md-restaurant",
-  Map: "md-map",
-  Settings: "md-settings",
-};
 
-const Settings = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
-);
-const Map = () => (
-  <SafeArea>
-    <Text> Map</Text>
-  </SafeArea>
-);
 
 const theme = {
   colors: {
