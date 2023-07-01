@@ -3,9 +3,9 @@ import { Searchbar } from 'react-native-paper';
 import { StatusBar, FlatList, SafeAreaView } from 'react-native';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
-import { Spacer } from '../../components/spacers/spacer.component';
+// import { Spacer } from '../../components/spacers/spacer.component';
 import { Text } from 'react-native';
-import { GOOGLE_MAPS_API_KEY } from '@env';
+// import { GOOGLE_MAPS_API_KEY } from '@env';
 
 const SafeArea = styled(SafeAreaView)`
     flex: 1;
@@ -50,9 +50,9 @@ export const RestaurantsScreen = () => (
                 { name: '14' },
             ]}
             renderItem={({ item }) => (
-                <Spacer position="bottom" size="large">
+                <View style={{marginBottom: 16}}>
                     <RestaurantItem>{item.name}</RestaurantItem>
-                </Spacer>
+                </View>
             )}
             keyExtractor={(item) => item.name}
         />
