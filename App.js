@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 
 import { SafeArea } from "./src/components/utility/safe-area.component";
@@ -55,23 +55,13 @@ const theme = {
 };
 
 export default function App() {
-  const [randomRestaurant, setRandomRestaurant] = useState(null);
-
-  const handleRandomButtonPress = () => {
-    console.log("WHY WONT YOU WORK");
-  };
-
-  useEffect(() => {
-    if (randomRestaurant) {
-      console.log("Random restaurant:", randomRestaurant);
-    }
-  }, [randomRestaurant]);
+  
   return (
     <PaperProvider>
       <ThemeProvider theme={theme}>
-        <FilterBar />
-        <DistanceSlider />
-        <RandomButton onPress={() => console.log("boop")} />
+        {/* <FilterBar /> */}
+        {/* <DistanceSlider /> */}
+        {/* <RandomButton onPress={handleRandomButtonPress()} /> */}
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
