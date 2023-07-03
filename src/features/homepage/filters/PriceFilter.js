@@ -9,6 +9,10 @@ const PriceFilter = () => {
     setSelectedPrice(selected);
   };
 
+  const applyFilter = () => {
+    console.log(`Filter applied with price: ${selectedPrice}`);
+  };
+
   return (
     <View
       style={{
@@ -33,18 +37,38 @@ const PriceFilter = () => {
           <Text style={{ color: "white" }}>{price}</Text>
         </TouchableOpacity>
       ))}
-      <TouchableOpacity
+      <View
         style={{
-          backgroundColor: "gray",
-          marginBottom: 10,
-          borderRadius: 10,
-          padding: 10,
-          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "space-between",
         }}
-        onPress={() => setSelectedPrice(null)}
       >
-        <Text style={{ color: "white" }}>Reset</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "blue",
+            marginBottom: 10,
+            borderRadius: 10,
+            padding: 10,
+            marginRight: 10, // Add some margin to separate the buttons
+            alignItems: "center",
+          }}
+          onPress={() => setSelectedPrice(null)}
+        >
+          <Text style={{ color: "white" }}>Reset</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "blue",
+            marginBottom: 10,
+            borderRadius: 10,
+            padding: 10,
+            alignItems: "center",
+          }}
+          onPress={applyFilter}
+        >
+          <Text style={{ color: "white" }}>Apply Filter</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

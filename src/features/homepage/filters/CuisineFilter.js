@@ -3,7 +3,6 @@ import {
   View,
   Text,
   FlatList,
-  Button,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
@@ -46,6 +45,10 @@ const CuisineFilter = () => {
     </TouchableOpacity>
   );
 
+  const applyFilter = () => {
+    console.log(`Filter applied with cuisine: ${selectedCuisines}`);
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -55,8 +58,15 @@ const CuisineFilter = () => {
         numColumns={3}
       />
       <View style={styles.buttonsContainer}>
-        <Button title="Reset" onPress={() => setSelectedCuisines([])} />
-        <Button title="Apply filter" onPress={() => {}} />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setSelectedCuisines([])}
+        >
+          <Text style={styles.buttonText}>Reset</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={applyFilter}>
+          <Text style={styles.buttonText}>Apply Filter</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -82,8 +92,20 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 20,
+    alignItems: "center",
+    // marginTop: 20,
+  },
+  button: {
+    backgroundColor: "blue",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    flex: 1,
+    margin: 10,
+  },
+  buttonText: {
+    color: "white",
   },
 });
+
 export default CuisineFilter;

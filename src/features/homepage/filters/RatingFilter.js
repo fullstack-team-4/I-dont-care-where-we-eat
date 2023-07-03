@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
 const RatingFilter = () => {
   const [selectedRating, setSelectedRating] = useState(0);
 
   const selectRating = (rating) => {
     setSelectedRating(rating);
+  };
+
+  const applyFilter = () => {
+    console.log(`Filter applied with rating: ${selectedRating}`);
   };
 
   return (
@@ -61,7 +65,7 @@ const RatingFilter = () => {
             padding: 10,
             marginLeft: 10,
           }}
-          // onPress={applyFilter}
+          onPress={applyFilter}
         >
           <Text style={{ color: "white" }}>Apply Filter</Text>
         </TouchableOpacity>
