@@ -3,7 +3,7 @@ import { Searchbar } from 'react-native-paper';
 import { StatusBar, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
-import { Spacer } from '../../components/spacers/spacer.component';
+// import { Spacer } from '../../components/spacers/spacer.component';
 import { Text } from 'react-native';
 import RandomButton from '../homepage/randomButton';
 import FilterBar from '../homepage/FilterBar';

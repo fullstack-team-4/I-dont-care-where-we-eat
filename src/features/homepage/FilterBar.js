@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { View } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 import { IconButton, Menu } from "react-native-paper";
 import RBSheet from "react-native-raw-bottom-sheet";
 import CuisineFilter from "./filters/CuisineFilter";
@@ -10,15 +11,15 @@ import RatingFilter from "./filters/RatingFilter";
 const FilterBar = () => {
   const refRBsheet = useRef();
   const [activeFilter, setActiveFilter] = useState(null);
-  const [visible, setVisible] = useState(false);
+  // const [visible, setVisible] = useState(false);
 
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+  // const openMenu = () => setVisible(true);
+  // const closeMenu = () => setVisible(false);
 
   const openFilter = (filterType) => {
     setActiveFilter(filterType);
     refRBsheet.current.open();
-    setVisible(false); // Close the menu after selecting a filter
+    // setVisible(false); // Close the menu after selecting a filter
   };
 
   const getFilterContent = () => {
@@ -40,34 +41,37 @@ const FilterBar = () => {
     <View>
       <View
         // { Top navigation bar }
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-around",
-          marginTop: 50,
-          backgroundColor: "#eeeeee",
-          height: 50,
-          borderRadius: 25,
-        }}
+        style={styles.filterBar}
       >
-        <Menu
-          visible={visible}
-          onDismiss={() => setVisible(false)}
-          anchor={
-            <IconButton
-              icon="menu"
-              color="#0000"
-              size={20}
-              onPress={() => setVisible(!visible)}
-            />
-          }
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => openFilter("open")}
         >
-          <Menu.Item onPress={() => openFilter("open")} title="Open" />
-          <Menu.Item onPress={() => openFilter("cuisines")} title="Cuisines" />
-          <Menu.Item onPress={() => openFilter("price")} title="Price" />
-          <Menu.Item onPress={() => openFilter("rating")} title="Rating" />
-        </Menu>
+          <Text>Open</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => openFilter("cuisines")}
+        >
+          <Text style={styles.filterText}>Cuisines</Text>
+          <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => openFilter("price")}
+        >
+          <Text style={styles.filterText}>Price</Text>
+          <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => openFilter("rating")}
+        >
+          <Text style={styles.filterText}>Rating</Text>
+          <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
+        </TouchableOpacity>
       </View>
+
       {/* Bottom Sheet component */}
       <RBSheet
         ref={refRBsheet}
@@ -85,5 +89,28 @@ const FilterBar = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  filterBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginTop: 50,
+    backgroundColor: "#eeeeee",
+    height: 50,
+    borderRadius: 25,
+  },
+
+  filterButton: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 20,
+    alignItems: "center",
+  },
+  filterText: {
+    marginRight: 5,
+  },
+});
 
 export default FilterBar;

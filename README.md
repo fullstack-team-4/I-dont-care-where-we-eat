@@ -3,6 +3,7 @@ Flo -
  npm install react-native-raw-bottom-sheet
  npm install react-native-paper
  npm install react-native-vector-icons
+ npm install react-native-star-rating
 Skyler - Installed Packages:
 npm install styled-components@latest
 expo install expo-location --npm
