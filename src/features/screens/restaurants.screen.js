@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Searchbar } from 'react-native-paper';
-import { StatusBar, FlatList, SafeAreaView } from 'react-native';
+import { StatusBar, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
-import { Spacer } from '../../components/spacers/spacer.component';
+// import { Spacer } from '../../components/spacers/spacer.component';
 import { Text } from 'react-native';
+import RandomButton from '../homepage/randomButton';
+import FilterBar from '../homepage/FilterBar';
+import DistanceSlider from '../homepage/DistanceSlider';
+
 import { GOOGLE_MAPS_API_KEY } from '@env';
 
 const SafeArea = styled(SafeAreaView)`
@@ -27,34 +31,26 @@ const RestaurantItem = styled(Text)`
     margin-bottom: 8px;
 `;
 
-export const RestaurantsScreen = () => (
-    <SafeArea>
-        <SearchContainer>
-            <Searchbar />
-        </SearchContainer>
-        <RestaurantList
-            data={[
-                { name: '1' },
-                { name: '2' },
-                { name: '3' },
-                { name: '4' },
-                { name: '5' },
-                { name: '6' },
-                { name: '7' },
-                { name: '8' },
-                { name: '9' },
-                { name: '10' },
-                { name: '11' },
-                { name: '12' },
-                { name: '13' },
-                { name: '14' },
-            ]}
-            renderItem={({ item }) => (
-                <Spacer position="bottom" size="large">
-                    <RestaurantItem>{item.name}</RestaurantItem>
-                </Spacer>
-            )}
-            keyExtractor={(item) => item.name}
-        />
-    </SafeArea>
-);
+export const RestaurantsScreen = () => {
+    const [randomRestaurant, setRandomRestaurant] = useState(null);
+  
+    const handleRandomButtonPress = () => {
+      console.log("WHY WONT YOU WORK");
+    };
+  
+    useEffect(() => {
+      if (randomRestaurant) {
+        console.log("Random restaurant:", randomRestaurant);
+      }
+    }, [randomRestaurant]);
+  
+    return (
+      <SafeArea>
+        <ScrollView>
+         <FilterBar />
+        <DistanceSlider />
+                <RandomButton onPress={handleRandomButtonPress()} />
+                </ScrollView>
+      </SafeArea>
+    );
+};

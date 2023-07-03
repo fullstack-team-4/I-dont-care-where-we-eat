@@ -7,15 +7,12 @@ import { ThemeProvider } from "styled-components/native";
 
 import { SafeArea } from "./src/components/utility/safe-area.component";
 
-import DistanceSlider from "./src/features/homepage/DistanceSlider";
 import MapScreen from "./src/features/screens/mapView.screen";
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
 
-import RandomButton from "./src/features/homepage/randomButton";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { PaperProvider } from "react-native-paper";
-import FilterBar from "./src/features/homepage/FilterBar";
 
 const Tab = createBottomTabNavigator();
 
@@ -55,23 +52,9 @@ const theme = {
 };
 
 export default function App() {
-  const [randomRestaurant, setRandomRestaurant] = useState(null);
-
-  const handleRandomButtonPress = () => {
-    console.log("WHY WONT YOU WORK");
-  };
-
-  useEffect(() => {
-    if (randomRestaurant) {
-      console.log("Random restaurant:", randomRestaurant);
-    }
-  }, [randomRestaurant]);
   return (
     <PaperProvider>
       <ThemeProvider theme={theme}>
-        <FilterBar />
-        <DistanceSlider />
-        <RandomButton onPress={() => console.log("boop")} />
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({

@@ -3,6 +3,7 @@ import { TouchableOpacity, Image, Text } from "react-native";
 import styled from "styled-components/native";
 import { useState } from 'react';
 import axios from 'axios';
+import { PLACES_KEY } from '@env'
 
 const ButtonContainer = styled(TouchableOpacity)`
   flex-direction: row;
@@ -28,7 +29,7 @@ const RandomButton = ({ onPress }) => {
                         location: '34.052235,-118.243683',
                         radius: 1000,
                         type: 'restaurant',
-                        key: 'AIzaSyAJY4PiiBXtUQfOJHVkPpQj1twUacZk6Lo',
+                        key: PLACES_KEY,
                     }, 
                 }, console.log(response)
             );
@@ -43,7 +44,6 @@ const RandomButton = ({ onPress }) => {
 
     const handlePress = () => {
         generateRandomRestaurant();
-        onPress(); 
         console.log('this is handlepress');
     };
 
