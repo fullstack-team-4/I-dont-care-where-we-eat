@@ -19,6 +19,8 @@ import { Spacer } from '../../components/spacers/spacer.component';
 import SearchInput from '../../features/searchBar/SeachInput';
 
 
+
+
 export default function MapScreen() {
     //state for user location
     const [location, setLocation] = useState(null);
@@ -67,11 +69,13 @@ export default function MapScreen() {
                     setRestaurants(response.data.results);
                     prevRestaurantsRef.current = response.data.results;
                 })
+                
                 .catch((error) => {
                     Alert.alert('Error fetching restaurant data:', error);
                 });
         }
     }, [location]);
+    
 
     //UPDATE USER LOCATION SO IT DOESN'T AUTOMATICALLY DRAIN BATTERY LIFE
     const handlePress = async () => {
@@ -95,6 +99,7 @@ export default function MapScreen() {
                 .get(url)
                 .then((response) => {
                     setRestaurants(response.data.results);
+
                     prevRestaurantsRef.current = response.data.results;
                 })
                 .catch((error) => {
@@ -164,6 +169,7 @@ export default function MapScreen() {
                     />
                 </SearchContainer>
                 <RestaurantList
+                
                     data={restaurants}
                     renderItem={({ item }) => (
                         <Spacer position="bottom" size="large">

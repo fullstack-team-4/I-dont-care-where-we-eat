@@ -8,6 +8,7 @@ import { Text } from 'react-native';
 import RandomButton from '../homepage/randomButton';
 import FilterBar from '../homepage/FilterBar';
 import DistanceSlider from '../homepage/DistanceSlider';
+import {restaurants} from '../screens/mapView.screen'
 
 import { GOOGLE_MAPS_API_KEY } from '@env';
 
@@ -33,9 +34,14 @@ const RestaurantItem = styled(Text)`
 
 export const RestaurantsScreen = () => {
     const [randomRestaurant, setRandomRestaurant] = useState(null);
+    const [restaurants, setRestaurants] = useState([]);
   
     const handleRandomButtonPress = () => {
-      console.log("WHY WONT YOU WORK");
+      if (restaurants.length > 0) {
+        const randomIndex = Math.floor(Math.random() * restaurants.length);
+        const randomRestaurant = restaurants[randomIndex];
+        setRandomRestaurant(randomRestaurant);
+      }
     };
   
     useEffect(() => {
@@ -49,7 +55,7 @@ export const RestaurantsScreen = () => {
         <ScrollView>
          <FilterBar />
         <DistanceSlider />
-                <RandomButton onPress={handleRandomButtonPress()} />
+        <RandomButton onPress={handleRandomButtonPress()} restaurants={restaurants} />
                 </ScrollView>
       </SafeArea>
     );
