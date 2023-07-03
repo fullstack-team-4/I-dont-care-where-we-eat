@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { IconButton, Menu } from "react-native-paper";
+import React, { useRef, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import CuisineFilter from "./filters/CuisineFilter";
 import OpenFilter from "./filters/OpenFilter";
@@ -11,15 +10,10 @@ import RatingFilter from "./filters/RatingFilter";
 const FilterBar = () => {
   const refRBsheet = useRef();
   const [activeFilter, setActiveFilter] = useState(null);
-  // const [visible, setVisible] = useState(false);
-
-  // const openMenu = () => setVisible(true);
-  // const closeMenu = () => setVisible(false);
 
   const openFilter = (filterType) => {
     setActiveFilter(filterType);
     refRBsheet.current.open();
-    // setVisible(false); // Close the menu after selecting a filter
   };
 
   const getFilterContent = () => {
@@ -95,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    marginTop: 50,
+    marginBottom: 10,
     backgroundColor: "#eeeeee",
     height: 50,
     borderRadius: 25,
