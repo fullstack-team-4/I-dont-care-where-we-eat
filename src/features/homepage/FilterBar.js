@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    marginTop: 50,
+    // marginTop: 50,
     backgroundColor: "#eeeeee",
     height: 50,
     borderRadius: 25,
