@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { TouchableOpacity, Image, Text } from "react-native";
 import styled from "styled-components/native";
-import { useState } from 'react';
-import axios from 'axios';
-import { PLACES_KEY } from '@env'
+import { PLACES_KEY } from '@env';
 
 const ButtonContainer = styled(TouchableOpacity)`
   flex-direction: row;
@@ -12,49 +10,30 @@ const ButtonContainer = styled(TouchableOpacity)`
   padding: 8px;
 `;
 
-const ButtonText = styled(Text)`
-  font-size: 16px;
-  margin-left: 8px;
-`;
+const RandomButton = ({ onPress, restaurants }) => {
+  const [randomRestaurant, setRandomRestaurant] = useState(null);
 
-const RandomButton = ({ onPress }) => {
-    const [randomRestaurant, setRandomRestaurant] = useState(null);
+  const generateRandomRestaurant = () => {
+    if (restaurants.length > 0) {
+      const randomIndex = Math.floor(Math.random() * restaurants.length);
+      const randomRestaurant = restaurants[randomIndex];
+      setRandomRestaurant(randomRestaurant);
+    }
+  };
 
-    const generateRandomRestaurant = async () => {
-        try {
-            const response = await axios.get(
-                'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-                {
-                    params: {
-                        location: '34.052235,-118.243683',
-                        radius: 1000,
-                        type: 'restaurant',
-                        key: PLACES_KEY,
-                    }, 
-                }, console.log(response)
-            );
+  const handlePress = () => {
+    generateRandomRestaurant();
+    console.log('this is handlepress');
+  };
 
-            const randomIndex = Math.floor(Math.random() * response.data.results.length);
-            const randomRestaurant = response.data.results[randomIndex];
-            setRandomRestaurant(randomRestaurant);
-        } catch (error) {
-            console.error('Error generating random restaurant:', error);
-        }
-    };
-
-    const handlePress = () => {
-        generateRandomRestaurant();
-        console.log('this is handlepress');
-    };
-
-    return (
-        <ButtonContainer onPress={handlePress}>
-            <Image
-                source={require("../../../assets/idc2.png")}
-                style={{ width: 300, height: 300 }}
-            />
-        </ButtonContainer>
-    );
+  return (
+    <ButtonContainer onPress={handlePress}>
+      <Image
+        source={require("../../../assets/idc2.png")}
+        style={{ width: 300, height: 300 }}
+      />
+    </ButtonContainer>
+  );
 };
 
 export default RandomButton;
