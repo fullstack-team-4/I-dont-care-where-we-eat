@@ -10,18 +10,18 @@ import { SafeArea } from './src/components/utility/safe-area.component';
 import MapScreen from './src/features/screens/MapScreen';
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
 import React, { useState, useEffect } from 'react';
+import RandomButton from './src/features/homepage/randomButton';
 
 import { PaperProvider } from 'react-native-paper';
 
 import * as Location from 'expo-location';
 import { GOOGLE_MAPS_API_KEY } from '@env';
 import axios from 'axios';
-import RandomButton from './src/features/homepage/randomButton';
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
-  Restaurants: 'md-restaurant',
+  Home: 'md-restaurant',
   Map: 'md-map',
   Settings: 'md-settings',
 };
@@ -101,6 +101,7 @@ export default function App() {
 
   // console.log(userLocation);
 
+
   return (
     <PaperProvider>
       <ThemeProvider theme={theme}>
@@ -122,8 +123,11 @@ export default function App() {
               tabBarStyle: {
                 display: 'flex',
               },
-            })}>
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+            })}
+          >
+            <Tab.Screen name="Home">
+              {() => <RestaurantsScreen restaurantData={restaurantData} />}
+            </Tab.Screen>
             <Tab.Screen name="Map">
               {() => (
                 <MapScreen
@@ -140,4 +144,4 @@ export default function App() {
       <ExpoStatusBar style="auto" />
     </PaperProvider>
   );
-}
+              }  

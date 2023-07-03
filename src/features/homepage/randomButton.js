@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { TouchableOpacity, Image, Text } from "react-native";
+import { TouchableOpacity, Image, Text, View } from "react-native";
 import styled from "styled-components/native";
-import { PLACES_KEY } from '@env';
 
 const ButtonContainer = styled(TouchableOpacity)`
   flex-direction: row;
@@ -10,7 +9,7 @@ const ButtonContainer = styled(TouchableOpacity)`
   padding: 8px;
 `;
 
-const RandomButton = ({ onPress, restaurants }) => {
+const RandomButton = ({ restaurants }) => {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
 
   const generateRandomRestaurant = () => {
@@ -20,18 +19,27 @@ const RandomButton = ({ onPress, restaurants }) => {
       setRandomRestaurant(randomRestaurant);
     }
   };
-
+  
   const handlePress = () => {
     generateRandomRestaurant();
-    console.log('this is handlepress');
   };
 
   return (
     <ButtonContainer onPress={handlePress}>
-      <Image
-        source={require("../../../assets/idc2.png")}
-        style={{ width: 300, height: 300 }}
-      />
+      {randomRestaurant ? (
+        <View>
+          <Text> Tap again for a different fate</Text>
+          <Text>{randomRestaurant.name}</Text>
+          <Text>Rating: {randomRestaurant.rating}</Text>
+          
+          {/* ADD PRICE AND IMG LATER */}
+        </View>
+      ) : (
+        <Image
+          source={require("../../../assets/idc2.png")}
+          style={{ width: 300, height: 300 }}
+        />
+      )}
     </ButtonContainer>
   );
 };

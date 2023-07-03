@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Searchbar } from 'react-native-paper';
 import { StatusBar, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
-// import { Spacer } from '../../components/spacers/spacer.component';
 import { Text } from 'react-native';
 import RandomButton from '../homepage/randomButton';
 import FilterBar from '../homepage/FilterBar';
 import DistanceSlider from '../homepage/DistanceSlider';
-
-import { GOOGLE_MAPS_API_KEY } from '@env';
 
 const SafeArea = styled(SafeAreaView)`
     flex: 1;
@@ -31,7 +27,7 @@ const RestaurantItem = styled(Text)`
     margin-bottom: 8px;
 `;
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({restaurantData}) => {
     const [randomRestaurant, setRandomRestaurant] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
   
@@ -50,12 +46,12 @@ export const RestaurantsScreen = () => {
     }, [randomRestaurant]);
   
     return (
-      <SafeArea>
-        <ScrollView>
-         <FilterBar />
-        <DistanceSlider />
-        <RandomButton onPress={handleRandomButtonPress()} restaurants={restaurants} />
-                </ScrollView>
-      </SafeArea>
-    );
-};
+        <SafeArea>
+          <ScrollView>
+            <FilterBar />
+            <DistanceSlider />
+            <RandomButton restaurants={restaurantData} />
+          </ScrollView>
+        </SafeArea>
+      );
+    };
