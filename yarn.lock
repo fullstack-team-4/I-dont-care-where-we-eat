@@ -1473,9 +1473,9 @@
     "exec-async" "^2.2.0"
 
 "@expo/package-manager@~1.0.0":
-  "integrity" "sha512-ue6NIIsNafa2bK7zUl7Y61YNtkPsg7sJcTOyQo/87Yqf6Q+2bOrvdw1xjviaFrMsTZcpOPVf+ZIEYtE0lw0k6A=="
-  "resolved" "https://registry.npmjs.org/@expo/package-manager/-/package-manager-1.0.1.tgz"
-  "version" "1.0.1"
+  "integrity" "sha512-dlUp6o8qs1mi3/+l3y7cY3oMoqQVVzvH18cUTi6+t4ob8XwTpaeP2SwOP+obwZN29dMg9YzZAv4eQz+mshAbQA=="
+  "resolved" "https://registry.npmjs.org/@expo/package-manager/-/package-manager-1.0.2.tgz"
+  "version" "1.0.2"
   dependencies:
     "@expo/json-file" "^8.2.37"
     "@expo/spawn-async" "^1.5.0"
@@ -3494,19 +3494,19 @@
   "version" "5.1.1"
 
 "expo-asset@~8.9.1":
-  "integrity" "sha512-ugavxA7Scn96TBdeTYQA6xtHktnk0o/0xk7nFkxJKoH/t2cZDFSB05X0BI2/LDZY4iE6xTPOYw4C4mmourWfuA=="
-  "resolved" "https://registry.npmjs.org/expo-asset/-/expo-asset-8.9.1.tgz"
-  "version" "8.9.1"
+  "integrity" "sha512-aHMaZkIG5/UoguINEHm2ln/KviU2m/yuryslnhCKR3KXRxiLnMhxmrONLGbknuNE0O1iCaprrl1w3y71u01Rpw=="
+  "resolved" "https://registry.npmjs.org/expo-asset/-/expo-asset-8.9.2.tgz"
+  "version" "8.9.2"
   dependencies:
     "blueimp-md5" "^2.10.0"
-    "expo-constants" "~14.2.0"
-    "expo-file-system" "~15.2.0"
+    "expo-constants" "~14.3.0"
+    "expo-file-system" "~15.3.0"
     "invariant" "^2.2.4"
     "md5-file" "^3.2.3"
     "path-browserify" "^1.0.0"
     "url-parse" "^1.5.9"
 
-"expo-constants@~14.2.0", "expo-constants@~14.2.1":
+"expo-constants@~14.2.1":
   "integrity" "sha512-DD5u4QmBds2U7uYo409apV7nX+XjudARcgqe7S9aRFJ/6kyftmuxvk1DpaU4X42Av8z/tfKwEpuxl+vl7HHx/Q=="
   "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-14.2.1.tgz"
   "version" "14.2.1"
@@ -3514,10 +3514,25 @@
     "@expo/config" "~8.0.0"
     "uuid" "^3.3.2"
 
-"expo-file-system@~15.2.0", "expo-file-system@~15.2.2":
+"expo-constants@~14.3.0":
+  "integrity" "sha512-O8b+mZlPXZGH4wLLd+jMihGD0ZSMJRSmSsmcG7T60jHU3Dw4yDIuzHM/wMoBoL1pxLIbEwvcwDj0w8c+Sn+1sQ=="
+  "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-14.3.0.tgz"
+  "version" "14.3.0"
+  dependencies:
+    "@expo/config" "~8.0.0"
+    "uuid" "^3.3.2"
+
+"expo-file-system@~15.2.2":
   "integrity" "sha512-LFkOLcWwlmnjkURxZ3/0ukS35OswX8iuQknLHRHeyk8mUA8fpRPPelD/a1lS+yclqfqavMJmTXVKM1Nsq5XVMA=="
   "resolved" "https://registry.npmjs.org/expo-file-system/-/expo-file-system-15.2.2.tgz"
   "version" "15.2.2"
+  dependencies:
+    "uuid" "^3.4.0"
+
+"expo-file-system@~15.3.0":
+  "integrity" "sha512-YUvNZzZJlF5TZM+FoRW9biJPB7qEgZbGYm8xJpqnxpj70FkFhwwoKiXVduZk+KVNiIs7d0q7e+Jdvmcr+Id3FQ=="
+  "resolved" "https://registry.npmjs.org/expo-file-system/-/expo-file-system-15.3.0.tgz"
+  "version" "15.3.0"
   dependencies:
     "uuid" "^3.4.0"
 
@@ -4980,6 +4995,14 @@
     "metro-core" "0.73.10"
     "metro-runtime" "0.73.10"
 
+"metro-core@^0.76.7":
+  "integrity" "sha512-0b8KfrwPmwCMW+1V7ZQPkTy2tsEKZjYG9Pu1PTsu463Z9fxX7WaR0fcHFshv+J1CnQSUTwIGGjbNvj1teKe+pw=="
+  "resolved" "https://registry.npmjs.org/metro-core/-/metro-core-0.76.7.tgz"
+  "version" "0.76.7"
+  dependencies:
+    "lodash.throttle" "^4.1.1"
+    "metro-resolver" "0.76.7"
+
 "metro-core@0.73.10":
   "integrity" "sha512-5uYkajIxKyL6W45iz/ftNnYPe1l92CvF2QJeon1CHsMXkEiOJxEjo41l+iSnO/YodBGrmMCyupSO4wOQGUc0lw=="
   "resolved" "https://registry.npmjs.org/metro-core/-/metro-core-0.73.10.tgz"
@@ -5158,6 +5181,11 @@
   "version" "0.73.10"
   dependencies:
     "absolute-path" "^0.0.0"
+
+"metro-resolver@0.76.7":
+  "integrity" "sha512-pC0Wgq29HHIHrwz23xxiNgylhI8Rq1V01kQaJ9Kz11zWrIdlrH0ZdnJ7GC6qA0ErROG+cXmJ0rJb8/SW1Zp2IA=="
+  "resolved" "https://registry.npmjs.org/metro-resolver/-/metro-resolver-0.76.7.tgz"
+  "version" "0.76.7"
 
 "metro-runtime@0.73.10":
   "integrity" "sha512-EpVKm4eN0Fgx2PEWpJ5NiMArV8zVoOin866jIIvzFLpmkZz1UEqgjf2JAfUJnjgv3fjSV3JqeGG2vZCaGQBTow=="
@@ -6251,10 +6279,10 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
-"react-native-svg@^13.9.0":
-  "integrity" "sha512-Ey18POH0dA0ob/QiwCBVrxIiwflhYuw0P0hBlOHeY4J5cdbs8ngdKHeWC/Kt9+ryP6fNoEQ1PUgPYw2Bs/rp5Q=="
-  "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.9.0.tgz"
-  "version" "13.9.0"
+"react-native-svg@^13.4.0":
+  "integrity" "sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag=="
+  "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.4.0.tgz"
+  "version" "13.4.0"
   dependencies:
     "css-select" "^5.1.0"
     "css-tree" "^1.1.3"
