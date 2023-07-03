@@ -6462,10 +6462,10 @@
     "react-native-button" "^2.3.0"
     "react-native-vector-icons" "^4.5.0"
 
-"react-native-svg@^13.9.0":
-  "integrity" "sha512-Ey18POH0dA0ob/QiwCBVrxIiwflhYuw0P0hBlOHeY4J5cdbs8ngdKHeWC/Kt9+ryP6fNoEQ1PUgPYw2Bs/rp5Q=="
-  "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.9.0.tgz"
-  "version" "13.9.0"
+"react-native-svg@^13.4.0":
+  "integrity" "sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag=="
+  "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.4.0.tgz"
+  "version" "13.4.0"
   dependencies:
     "css-select" "^5.1.0"
     "css-tree" "^1.1.3"
