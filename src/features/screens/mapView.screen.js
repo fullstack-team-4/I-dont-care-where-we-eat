@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Searchbar } from 'react-native-paper';
+import React, { useEffect, useState, useRef } from 'react';
 import {
     StyleSheet,
     ActivityIndicator,
@@ -17,13 +16,23 @@ import axios from 'axios';
 import { GOOGLE_MAPS_API_KEY } from '@env';
 import styled from 'styled-components/native';
 import { Spacer } from '../../components/spacers/spacer.component';
+import SearchInput from '../../features/searchBar/SeachInput';
 
 export default function MapScreen() {
+    //state for user location
     const [location, setLocation] = useState(null);
+    //state for restuarants data
     const [restaurants, setRestaurants] = useState([]);
+    //state for loading
     const [loading, setLoading] = useState(false);
+    //state for list view
     const [listView, setListView] = useState(false);
+    //state for search query
+    const [searchResults, setSearchResults] = useState([]);
+    //need a state for after the search is completed
+
     const radius = 5 * 1609;
+    const prevRestaurantsRef = useRef([]);
     //GET USERS LOCATION
     useEffect(() => {
         (async () => {
@@ -54,6 +63,7 @@ export default function MapScreen() {
                 .get(url)
                 .then((response) => {
                     setRestaurants(response.data.results);
+                    prevRestaurantsRef.current = response.data.results;
                 })
                 .catch((error) => {
                     Alert.alert('Error fetching restaurant data:', error);
@@ -68,6 +78,7 @@ export default function MapScreen() {
             let location = await Location.getCurrentPositionAsync({
                 accuracy: Location.Accuracy.High,
             });
+            setLoading(false);
             const { latitude, longitude } = location.coords;
             setLocation({
                 latitude,
@@ -82,6 +93,7 @@ export default function MapScreen() {
                 .get(url)
                 .then((response) => {
                     setRestaurants(response.data.results);
+                    prevRestaurantsRef.current = response.data.results;
                 })
                 .catch((error) => {
                     Alert.alert('Error fetching restaurant data:', error);
@@ -91,6 +103,20 @@ export default function MapScreen() {
         } finally {
             setLoading(false);
         }
+    };
+
+    //Callback function to take in the input from the SearchInput component
+    const handleSearch = (query) => {
+        const filteredRestaurants = restaurants.filter((restaurant) =>
+            restaurant.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setRestaurants(filteredRestaurants);
+        // setSearchResults(query);
+    };
+
+    const resetSearch = () => {
+        setSearchResults([]);
+        setRestaurants(prevRestaurantsRef.current);
     };
 
     //CHANGE STATE FROM MAP VIEW TO LIST VIEW
@@ -128,7 +154,11 @@ export default function MapScreen() {
         return (
             <SafeArea>
                 <SearchContainer>
-                    <Searchbar />
+                    {/* pass the function as props */}
+                    <SearchInput
+                        onSearch={handleSearch}
+                        SetSearchResults={setSearchResults}
+                    />
                 </SearchContainer>
                 <RestaurantList
                     data={restaurants}
@@ -143,6 +173,9 @@ export default function MapScreen() {
                 />
                 <View style={styles.listViewButton}>
                     <Button title="Map View" onPress={handleListView} />
+                </View>
+                <View style={styles.resetSearchButton}>
+                    <Button title="Clear Search" onPress={resetSearch} />
                 </View>
             </SafeArea>
         );
@@ -236,7 +269,25 @@ const styles = StyleSheet.create({
     },
     listViewButton: {
         position: 'absolute',
-        bottom: '5%',
+        bottom: '2%',
+        right: '5%',
+        alignSelf: 'center',
+        backgroundColor: '#99ccff',
+        borderRadius: 10,
+        padding: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.3)',
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 3,
+    },
+    resetSearchButton: {
+        position: 'absolute',
+        bottom: '2%',
+        left: '5%',
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
