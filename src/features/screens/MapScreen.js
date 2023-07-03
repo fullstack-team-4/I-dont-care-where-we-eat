@@ -56,6 +56,7 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
 
     // Callback function to take in the input from the SearchInput component
     const handleSearch = (query) => {
+        prevRestaurantsRef.current = restaurants;
         const filteredRestaurants = restaurantData.filter((restaurant) =>
             restaurant.name.toLowerCase().includes(query.toLowerCase())
         );
@@ -109,7 +110,9 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                     />
                 </SearchContainer>
                 <RestaurantList
-                    data={restaurantData}
+                    data={
+                        restaurants.length == 0 ? restaurantData : restaurants
+                    }
                     renderItem={({ item }) => (
                         <View style={{ marginBottom: 16 }}>
                             <RestaurantItem key={item.place_id}>
@@ -154,7 +157,10 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                         pinColor="#0066ff"
                     />
 
-                    {restaurantData.map((restaurant) => (
+                    {(restaurants.length == 0
+                        ? restaurantData
+                        : restaurants
+                    ).map((restaurant) => (
                         <Marker
                             key={restaurant.place_id}
                             coordinate={{
@@ -170,6 +176,9 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
 
             <View style={styles.updateLocationButton}>
                 <Button title="Get Current Location" onPress={handlePress} />
+            </View>
+            <View style={styles.resetSearchButton}>
+                <Button title="Clear Search" onPress={resetSearch} />
             </View>
             <View style={styles.listViewButton}>
                 <Button title="List View" onPress={handleListView} />
@@ -189,7 +198,7 @@ const styles = StyleSheet.create({
     },
     updateLocationButton: {
         position: 'absolute',
-        top: '5%',
+        top: '2%',
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
@@ -218,7 +227,7 @@ const styles = StyleSheet.create({
     listViewButton: {
         position: 'absolute',
         bottom: '2%',
-        right: '5%',
+        right: '2%',
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
@@ -235,7 +244,7 @@ const styles = StyleSheet.create({
     resetSearchButton: {
         position: 'absolute',
         bottom: '2%',
-        left: '5%',
+        left: '2%',
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
