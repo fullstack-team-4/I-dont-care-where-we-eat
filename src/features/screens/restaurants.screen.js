@@ -8,7 +8,6 @@ import { Text } from 'react-native';
 import RandomButton from '../homepage/randomButton';
 import FilterBar from '../homepage/FilterBar';
 import DistanceSlider from '../homepage/DistanceSlider';
-import {restaurants} from '../screens/mapView.screen'
 
 import { GOOGLE_MAPS_API_KEY } from '@env';
 
