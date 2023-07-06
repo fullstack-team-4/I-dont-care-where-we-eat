@@ -8,7 +8,13 @@ const ButtonContainer = styled(View)`
   align-items: center;
   justify-content: center;
   padding: 8px;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  elevation: 2;
 `;
+
 
 const RandomButton = ({ restaurants }) => {
   const [restaurant, setRandomRestaurant] = useState(null);
@@ -22,7 +28,7 @@ const RandomButton = ({ restaurants }) => {
   };
   
   const handlePress = () => {
-    console.log()
+    console.log('choosing fate')
     generateRandomRestaurant();
   };
 
@@ -40,13 +46,12 @@ const RandomButton = ({ restaurants }) => {
                style={{ width: 300, height: 300, resizeMode: 'contain', marginRight: 8,
                  shadowColor: 'red', shadowOpacity: 0.5, shadowOffset: { width: 1, height: 1 }, shadowRadius: 4,
                }}
-             />
-        ))}
+             />   
+        ))} 
       </ScrollView>
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{restaurant.name}</Text>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{restaurant.vicinity}</Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rating: {restaurant.rating} {restaurant.user_rating_total}</Text>
-          <Text onPress={handlePress} style={{ fontSize: 16, fontWeight: 'bold' }}>Tap again for a different fate ¯\_(ツ)_/¯</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rating: {restaurant.rating}/5 Reviews:{restaurant.user_ratings_total}</Text>
         </View>
       ) : (
         <TouchableOpacity activeOpacity={1} onPress={handlePress}>
@@ -57,7 +62,8 @@ const RandomButton = ({ restaurants }) => {
               </TouchableOpacity>
       )}
     </ButtonContainer>
-  );
+    
+  ); 
 };
 
 export default RandomButton;
