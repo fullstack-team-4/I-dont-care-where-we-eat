@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     // padding: 1,
   },
   selected: {
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    backgroundColor: 'rgba(128, 0, 0, 0.8)',
     // borderColor: "#ff0000", // red border color
     // borderWidth: 1,
   },
