@@ -23,18 +23,21 @@ import Logo from "./src/features/homepage/Logo";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
+
   Home: "md-restaurant",
   Map: "md-map",
   Settings: "md-settings",
+
 };
 
 const Settings = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
+    <SafeArea>
+        <Text>Settings</Text>
+    </SafeArea>
 );
 
 const theme = {
+
   colors: {
     primary: "#FF0000",
     secondary: "#00FF00",

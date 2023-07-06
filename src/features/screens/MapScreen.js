@@ -32,6 +32,8 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
     // need a state for after the search is completed
     const prevRestaurantsRef = useRef([]);
 
+    const [isFiltered, setIsFiltered] = useState(false);
+
     // UPDATE USER LOCATION SO IT DOESN'T AUTOMATICALLY DRAIN BATTERY LIFE
     const handlePress = async () => {
         setLoading(true);
@@ -56,15 +58,25 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
 
     // Callback function to take in the input from the SearchInput component
     const handleSearch = (query) => {
+        setIsFiltered(true);
         prevRestaurantsRef.current = restaurants;
-        const filteredRestaurants = restaurantData.filter((restaurant) =>
-            restaurant.name.toLowerCase().includes(query.toLowerCase())
-        );
-        setRestaurants(filteredRestaurants);
+        const apiKey = GOOGLE_MAPS_API_KEY;
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${userLocation.latitude},${userLocation.longitude}&radius=${filters.radius}&type=restaurant&key=${apiKey}`;
+
+        axios
+            .get(url)
+            .then((response) => {
+                // console.log(response);
+                setRestaurants(response.data.results);
+            })
+            .catch((error) => {
+                Alert.alert('Error fetching restaurant data:', error);
+            });
     };
 
     const resetSearch = () => {
         setSearchResults([]);
+        setIsFiltered(false);
         setRestaurants(prevRestaurantsRef.current);
     };
 
@@ -110,9 +122,7 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                     />
                 </SearchContainer>
                 <RestaurantList
-                    data={
-                        restaurants.length == 0 ? restaurantData : restaurants
-                    }
+                    data={isFiltered ? restaurants : restaurantData}
                     renderItem={({ item }) => (
                         <View style={{ marginBottom: 16 }}>
                             <RestaurantItem key={item.place_id}>
@@ -157,20 +167,19 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                         pinColor="#0066ff"
                     />
 
-                    {(restaurants.length == 0
-                        ? restaurantData
-                        : restaurants
-                    ).map((restaurant) => (
-                        <Marker
-                            key={restaurant.place_id}
-                            coordinate={{
-                                latitude: restaurant.geometry.location.lat,
-                                longitude: restaurant.geometry.location.lng,
-                            }}
-                            title={restaurant.name}
-                            description={restaurant.vicinity}
-                        />
-                    ))}
+                    {(isFiltered ? restaurants : restaurantData).map(
+                        (restaurant) => (
+                            <Marker
+                                key={restaurant.place_id}
+                                coordinate={{
+                                    latitude: restaurant.geometry.location.lat,
+                                    longitude: restaurant.geometry.location.lng,
+                                }}
+                                title={restaurant.name}
+                                description={restaurant.vicinity}
+                            />
+                        )
+                    )}
                 </MapView>
             ) : null}
 
