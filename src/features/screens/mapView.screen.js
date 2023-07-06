@@ -17,6 +17,7 @@ import { GOOGLE_MAPS_API_KEY } from '@env';
 import styled from 'styled-components/native';
 import { Spacer } from '../../components/spacers/spacer.component';
 import SearchInput from '../../features/searchBar/SeachInput';
+import { RestaurantInfoCard } from './RestaurantComponent';
 
 export default function MapScreen() {
     //state for user location
@@ -161,14 +162,15 @@ export default function MapScreen() {
                     />
                 </SearchContainer>
                 <RestaurantList
-                    data={restaurants}
-                    renderItem={({ item }) => (
-                        <Spacer position="bottom" size="large">
-                            <RestaurantItem key={item.place_id}>
-                                {item.name}
-                            </RestaurantItem>
-                        </Spacer>
-                    )}
+      data={restaurants}
+      renderItem={({ item }) => {
+    
+        return (
+          <Spacer position="bottom" size="large">
+            <RestaurantInfoCard key={item.place_id} {...item} />
+          </Spacer>
+        );
+      }}
                     keyExtractor={(item) => item.place_id}
                 />
                 <View style={styles.listViewButton}>

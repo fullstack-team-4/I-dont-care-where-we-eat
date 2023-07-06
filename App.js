@@ -9,14 +9,14 @@ import styled from "styled-components/native";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 
 import { Navigation } from "./src/features/navigation/Navigation";
+import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
-import {Amplify }from 'aws-amplify'
-import awsconfig from './src/aws-exports'
+import {Amplify} from 'aws-amplify';
+import awsconfig from './src/aws-exports';
 
-Amplify.configure(awsconfig)
+Amplify.configure(awsconfig);
 const Tab = createBottomTabNavigator();
-
-
 
 const theme = {
   colors: {
@@ -37,12 +37,20 @@ const theme = {
 };
 
 export default function App() {
+  const [oswaldLoaded] = useOswald({ Oswald_400Regular });
+  const [latoLoaded] = useLato({ Lato_400Regular });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    // Return a loading state or fallback UI if the fonts are not loaded yet
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <>
       <ThemeProvider theme={theme}>
-
-      <Navigation/>
-  
+      
+          <Navigation />
+        
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
