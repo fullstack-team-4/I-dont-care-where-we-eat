@@ -8,7 +8,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { SafeArea } from './src/components/utility/safe-area.component';
 
 import MapScreen from './src/features/screens/MapScreen';
-import { RestaurantsScreen } from './src/features/screens/restaurants.screen';
+import { HomeScreen } from './src/features/screens/HomeScreen';
 import React, { useState, useEffect } from 'react';
 import RandomButton from './src/features/homepage/randomButton';
 
@@ -17,6 +17,8 @@ import { PaperProvider } from 'react-native-paper';
 import * as Location from 'expo-location';
 import { GOOGLE_MAPS_API_KEY } from '@env';
 import axios from 'axios';
+
+import FilterBar from './src/features/homepage/FilterBar';
 
 const Tab = createBottomTabNavigator();
 
@@ -54,12 +56,12 @@ export default function App() {
     const [userLocation, setUserLocation] = useState(null);
     const [restaurantData, setRestaurantData] = useState([]);
 
+    //bring in the results
     const filters = {
-        radius: 5 * 1609,
-        keywords: null,
-        rating: null,
-        price: null,
-        type: null,
+        radius: 5 * 1609, //dynamically change with distance slider input
+        keywords: null, //dynamically change with cuisine filter
+        rating: null, //dynamically change with rating filter
+        price: null, //dynamically change with price filter
     };
 
     // GET USERS LOCATION
@@ -125,9 +127,7 @@ export default function App() {
                         })}>
                         <Tab.Screen name="Home">
                             {() => (
-                                <RestaurantsScreen
-                                    restaurantData={restaurantData}
-                                />
+                                <HomeScreen restaurantData={restaurantData} />
                             )}
                         </Tab.Screen>
                         <Tab.Screen name="Map">
