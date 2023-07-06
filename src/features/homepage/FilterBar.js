@@ -70,7 +70,7 @@ const FilterBar = () => {
       <RBSheet
         ref={refRBsheet}
         closeOnDragDown={true}
-        height={300}
+        height={475}
         customStyles={{
           container: {
             justifyContent: "center",
