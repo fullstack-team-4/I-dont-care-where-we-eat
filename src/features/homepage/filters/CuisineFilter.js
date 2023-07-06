@@ -107,6 +107,7 @@ const CuisineFilter = () => {
 
 const styles = StyleSheet.create({
   // ...rest of the styles
+
   header: {
     fontSize: 20,
     marginBottom: 15,
@@ -128,14 +129,13 @@ const styles = StyleSheet.create({
     // padding: 1,
   },
   selected: {
-    backgroundColor: 'rgba(128, 0, 0, 0.8)',
+    backgroundColor: "rgba(128, 0, 0, 0.8)",
     // borderColor: "#ff0000", // red border color
     // borderWidth: 1,
   },
   unselected: {
     backgroundColor: "#696969", // original color
     borderColor: "#696969", // border color is same as background color
-    // borderWidth: 1,
   },
   cuisineText: {
     fontSize: 14,

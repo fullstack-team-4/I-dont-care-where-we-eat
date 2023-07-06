@@ -1,9 +1,9 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 
 const RatingFilter = () => {
-  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedRating, setSelectedRating] = useState(null);
 
   const selectRating = (rating) => {
     setSelectedRating(rating);
@@ -14,64 +14,105 @@ const RatingFilter = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <View style={styles.container}>
+      <Text style={styles.header}>Rating</Text>
+      <View style={styles.ratingContainer}>
         {[1, 2, 3, 4, 5].map((rating, index) => (
-          <TouchableOpacity key={index} onPress={() => selectRating(rating)}>
-            <MaterialIcons
-              name="star-border"
-              size={40}
-              color={rating <= selectedRating ? "gold" : "gray"} // Set color here
-            />
-          </TouchableOpacity>
+          <View
+            key={index}
+            style={[
+              styles.ratingWrapper,
+              rating <= selectedRating ? styles.selected : styles.unselected,
+            ]}
+          >
+            <View style={styles.ratingButton}>
+              <TouchableOpacity onPress={() => selectRating(rating)}>
+                <MaterialIcons name="star" size={30} color="#fff" />
+              </TouchableOpacity>
+            </View>
+          </View>
         ))}
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 30,
-        }}
-      >
+      <View style={styles.buttonsContainer}>
         <TouchableOpacity
-          style={{
-            backgroundColor: "blue",
-            borderRadius: 10,
-            padding: 10,
-            marginLeft: 10,
-          }}
+          style={styles.resetButton}
           onPress={() => setSelectedRating(null)}
         >
-          <Text style={{ color: "white" }}>Reset</Text>
+          <Text style={styles.buttonText}>Reset</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "blue",
-            borderRadius: 10,
-            padding: 10,
-            marginLeft: 10,
-          }}
-          onPress={applyFilter}
-        >
-          <Text style={{ color: "white" }}>Apply Filter</Text>
+        <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
+          <Text style={styles.buttonText}>Apply Filter</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  header: {
+    fontSize: 20,
+    marginBottom: 15,
+    color: "maroon",
+    marginRight: "auto",
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around", // Change this to 'space-around' to evenly distribute items
+    marginBottom: 15,
+  },
+  ratingWrapper: {
+    margin: 5,
+    borderRadius: 10,
+    width: 60, // Adjust the width to fit the screen
+    height: 60, // Adjust the height to fit the screen
+    backgroundColor: "rgba(128, 0, 0, 0.8)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ratingButton: {
+    width: 50, // Adjust this size accordingly
+    height: 50, // Adjust this size accordingly
+    borderRadius: 10,
+    backgroundColor: "#696969",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selected: {
+    backgroundColor: "rgba(128, 0, 0, 0.8)",
+  },
+  unselected: {
+    backgroundColor: "#696969",
+  },
+  buttonText: {
+    color: "white",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  resetButton: {
+    backgroundColor: "maroon",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    flex: 1,
+    marginLeft: "auto",
+    marginRight: 50,
+    marginBottom: 25,
+  },
+  applyButton: {
+    backgroundColor: "maroon",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    flex: 1,
+    marginRight: "auto",
+    marginBottom: 25,
+  },
+});
 
 export default RatingFilter;
