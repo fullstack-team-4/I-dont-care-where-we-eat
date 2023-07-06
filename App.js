@@ -1,29 +1,31 @@
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import { Text, Alert } from 'react-native';
-import { ThemeProvider } from 'styled-components/native';
+import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { Text, Alert } from "react-native";
+import { ThemeProvider } from "styled-components/native";
 
-import { SafeArea } from './src/components/utility/safe-area.component';
+import { SafeArea } from "./src/components/utility/safe-area.component";
 
-import MapScreen from './src/features/screens/MapScreen';
+import MapScreen from "./src/features/screens/MapScreen";
 import { RestaurantsScreen } from "./src/features/screens/restaurants.screen";
-import React, { useState, useEffect } from 'react';
-import RandomButton from './src/features/homepage/randomButton';
+import React, { useState, useEffect } from "react";
+import RandomButton from "./src/features/homepage/randomButton";
 
-import { PaperProvider } from 'react-native-paper';
+import { PaperProvider } from "react-native-paper";
 
-import * as Location from 'expo-location';
-import { GOOGLE_MAPS_API_KEY } from '@env';
-import axios from 'axios';
+import * as Location from "expo-location";
+import { GOOGLE_MAPS_API_KEY } from "@env";
+import axios from "axios";
+
+import Logo from "./src/features/homepage/Logo";
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
-  Home: 'md-restaurant',
-  Map: 'md-map',
-  Settings: 'md-settings',
+  Home: "md-restaurant",
+  Map: "md-map",
+  Settings: "md-settings",
 };
 
 const Settings = () => (
@@ -34,14 +36,14 @@ const Settings = () => (
 
 const theme = {
   colors: {
-    primary: '#FF0000',
-    secondary: '#00FF00',
-    background: '#FFFFFF',
-    text: '#000000',
+    primary: "#FF0000",
+    secondary: "#00FF00",
+    background: "#FFFFFF",
+    text: "#000000",
   },
   fonts: {
-    regular: 'Arial',
-    bold: 'Helvetica-Bold',
+    regular: "Arial",
+    bold: "Helvetica-Bold",
   },
   spacing: {
     small: 8,
@@ -66,8 +68,8 @@ export default function App() {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('Permission to access location was denied');
+      if (status !== "granted") {
+        Alert.alert("Permission to access location was denied");
         return;
       }
 
@@ -94,13 +96,12 @@ export default function App() {
           setRestaurantData(response.data.results);
         })
         .catch((error) => {
-          Alert.alert('Error fetching restaurant data:', error);
+          Alert.alert("Error fetching restaurant data:", error);
         });
     }
   }, [userLocation]);
 
   // console.log(userLocation);
-
 
   return (
     <PaperProvider>
@@ -110,22 +111,22 @@ export default function App() {
             screenOptions={({ route }) => ({
               tabBarIcon: ({ size, color }) => {
                 const iconName = TAB_ICON[route.name];
-                return (
-                  <Ionicons
-                    name={iconName}
-                    size={size}
-                    color={color}
-                  />
-                );
+                return <Ionicons name={iconName} size={size} color={color} />;
               },
-              tabBarActiveTintColor: 'tomato',
-              tabBarInactiveTintColor: 'gray',
+              tabBarActiveTintColor: "tomato",
+              tabBarInactiveTintColor: "gray",
               tabBarStyle: {
-                display: 'flex',
+                display: "flex",
               },
             })}
           >
-            <Tab.Screen name="Home">
+            <Tab.Screen
+              name="Home"
+              options={{
+                headerTitle: () => <Logo />,
+                headerTitleAlign: "center",
+              }}
+            >
               {() => <RestaurantsScreen restaurantData={restaurantData} />}
             </Tab.Screen>
             <Tab.Screen name="Map">
@@ -144,4 +145,4 @@ export default function App() {
       <ExpoStatusBar style="auto" />
     </PaperProvider>
   );
-              }  
+}
