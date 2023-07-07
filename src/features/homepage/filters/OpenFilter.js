@@ -1,12 +1,30 @@
-import React from 'react'
-import { View,Text } from 'react-native'
+import React, { useState } from 'react';
+import { Text, View, Switch } from 'react-native';
 
-const OpenFilter = () => {
-  return (
-    <View>
-        <Text>OpenFilter</Text>
-    </View>
-  )
-}
+const OpenFilter = ({ onFilterApply }) => {
+    const [isEnabled, setIsEnabled] = useState(false);
 
-export default OpenFilter
+    const toggleSwitch = () => {
+        setIsEnabled((previousState) => !previousState);
+        onFilterApply(!isEnabled);
+    };
+
+    return (
+        <View
+            style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
+            <Text>Open Now</Text>
+            <Switch
+                trackColor={{ false: '#767577', true: '#81b0ff' }}
+                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+            />
+        </View>
+    );
+};
+export default OpenFilter;

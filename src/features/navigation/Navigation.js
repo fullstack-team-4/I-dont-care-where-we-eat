@@ -8,9 +8,9 @@ import { SignUpScreen } from "../screens/SignUpScreen/SignUpScreen";
 import { ConfirmEmailScreen } from "../screens/ConfirmEmailScreen/ConfirmEmailScreen";
 import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen/ForgotPasswordScreen";
 import { NewPasswordScreen } from "../screens/NewPasswordScreen/NewPasswordScreen";
-import HomeScreen from "../screens/HomeScreen/HomeScreen";
+import Homeicons from "../screens/HomeIcons/HomeIcons";
 import { Auth,Hub } from "aws-amplify";
-import HomeScreenGuest from "../screens/HomeScreen/HomeScreenGuest";
+import HomeScreenGuest from "../screens/HomeIcons/HomeScreenGuest";
 const Stack = createNativeStackNavigator();
 
 export const Navigation = () => {
@@ -56,7 +56,7 @@ export const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Home" component={Homeicons} />
         ) : (
           <>
           
