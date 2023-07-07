@@ -15,15 +15,15 @@ const PriceFilter = ({ onFilterApply }) => {
     };
 
     const applyFilter = () => {
-        // console.log(`Filter applied with price: ${prices[selectedPrice]}`);
-        onFilterApply(prices[selectedPrice]);
+      onFilterApply(prices[selectedPrice]);
+      console.log(`Filter applied with price: ${prices[selectedPrice]}`);
     };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Price</Text>
       <View style={styles.priceContainer}>
-      {Object.entries(prices).map(([price, index]) => (
+        {Object.entries(prices).map(([price, index]) => (
           <View
             key={index}
             style={[

@@ -79,6 +79,7 @@ const CuisineFilter = ({ onFilterApply }) => {
 
     const applyFilter = () => {
         onFilterApply(selectedCuisines.join('%20').toLowerCase());
+        console.log(`Filter applied with cuisine: ${selectedCuisines}`);
     };
 
   return (

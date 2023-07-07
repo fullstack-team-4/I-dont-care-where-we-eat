@@ -10,8 +10,8 @@ const RatingFilter = ({ onFilterApply }) => {
     };
 
     const applyFilter = () => {
-        // console.log(`Filter applied with rating: ${selectedRating}`);
-        onFilterApply(selectedRating);
+      onFilterApply(selectedRating);
+      console.log(`Filter applied with rating: ${selectedRating}`);
     };
 
   return (
