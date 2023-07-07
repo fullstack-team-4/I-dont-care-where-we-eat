@@ -8,69 +8,47 @@ import PriceFilter from "./filters/PriceFilter";
 import RatingFilter from "./filters/RatingFilter";
 
 const FilterBar = () => {
-  const refRBsheet = useRef();
-  const [activeFilter, setActiveFilter] = useState(null);
-
-  const openFilter = (filterType) => {
-    setActiveFilter(filterType);
-    refRBsheet.current.open();
-  };
-
-  const getFilterContent = () => {
-    switch (activeFilter) {
-      case "open":
-        return <OpenFilter />;
-      case "cuisines":
-        return <CuisineFilter />;
-      case "price":
-        return <PriceFilter />;
-      case "rating":
-        return <RatingFilter />;
-      default:
-        return null;
-    }
-  };
+  const refRBsheetOpen = useRef();
+  const refRBsheetCuisine = useRef();
+  const refRBsheetPrice = useRef();
+  const refRBsheetRating = useRef();
 
   return (
     <View>
-      <View
-        // { Top navigation bar }
-        style={styles.filterBar}
-      >
+      <View style={styles.filterBar}>
         <TouchableOpacity
           style={styles.filterButton}
-          onPress={() => openFilter("open")}
+          onPress={() => refRBsheetOpen.current.open()}
         >
           <Text>Open</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.filterButton}
-          onPress={() => openFilter("cuisines")}
+          onPress={() => refRBsheetCuisine.current.open()}
         >
           <Text style={styles.filterText}>Cuisines</Text>
           <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.filterButton}
-          onPress={() => openFilter("price")}
+          onPress={() => refRBsheetPrice.current.open()}
         >
           <Text style={styles.filterText}>Price</Text>
           <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.filterButton}
-          onPress={() => openFilter("rating")}
+          onPress={() => refRBsheetRating.current.open()}
         >
           <Text style={styles.filterText}>Rating</Text>
           <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
         </TouchableOpacity>
       </View>
 
-      {/* Bottom Sheet component */}
       <RBSheet
-        ref={refRBsheet}
+        ref={refRBsheetOpen}
         closeOnDragDown={true}
-        height={475}
+        height={250}
         customStyles={{
           container: {
             justifyContent: "center",
@@ -78,7 +56,49 @@ const FilterBar = () => {
           },
         }}
       >
-        {getFilterContent()}
+        <OpenFilter />
+      </RBSheet>
+
+      <RBSheet
+        ref={refRBsheetCuisine}
+        closeOnDragDown={true}
+        height={480}
+        customStyles={{
+          container: {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <CuisineFilter />
+      </RBSheet>
+
+      <RBSheet
+        ref={refRBsheetPrice}
+        closeOnDragDown={true}
+        height={250}
+        customStyles={{
+          container: {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <PriceFilter />
+      </RBSheet>
+
+      <RBSheet
+        ref={refRBsheetRating}
+        closeOnDragDown={true}
+        height={250}
+        customStyles={{
+          container: {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <RatingFilter />
       </RBSheet>
     </View>
   );
