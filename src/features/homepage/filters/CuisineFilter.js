@@ -38,16 +38,16 @@ const cuisineIcons = {
   Steak: { library: "MaterialCommunityIcons", name: "cow" },
 };
 
-const CuisineFilter = () => {
-  const [selectedCuisines, setSelectedCuisines] = useState([]);
+const CuisineFilter = ({ onFilterApply }) => {
+    const [selectedCuisines, setSelectedCuisines] = useState('');
 
-  const selectCuisine = (selected) => {
-    if (selectedCuisines.includes(selected)) {
-      setSelectedCuisines(selectedCuisines.filter((c) => c !== selected));
-    } else {
-      setSelectedCuisines([...selectedCuisines, selected]);
-    }
-  };
+    const selectCuisine = (selected) => {
+        if (selectedCuisines.includes(selected)) {
+            setSelectedCuisines(selectedCuisines.filter((c) => c !== selected));
+        } else {
+            setSelectedCuisines([...selectedCuisines, selected]);
+        }
+    };
 
   const renderCuisine = ({ item }) => {
     const IconComponent =
@@ -77,9 +77,9 @@ const CuisineFilter = () => {
     );
   };
 
-  const applyFilter = () => {
-    console.log(`Filter applied with cuisine: ${selectedCuisines}`);
-  };
+    const applyFilter = () => {
+        onFilterApply(selectedCuisines.join('%20').toLowerCase());
+    };
 
   return (
     <View style={styles.container}>

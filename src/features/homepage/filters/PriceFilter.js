@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const PriceFilter = () => {
-  const prices = ["$", "$$", "$$$", "$$$$"];
-  const [selectedPrice, setSelectedPrice] = useState(null);
+const PriceFilter = ({ onFilterApply }) => {
+    const prices = {
+        $: 0,
+        $$: 1,
+        $$$: 2,
+        $$$$: 3,
+    };
+    const [selectedPrice, setSelectedPrice] = useState(null);
 
-  const selectPrice = (price) => {
-    setSelectedPrice(price);
-  };
+    const selectPrice = (selected) => {
+        setSelectedPrice(selected);
+    };
 
-  const applyFilter = () => {
-    console.log(`Filter applied with price: ${selectedPrice}`);
-  };
+    const applyFilter = () => {
+        // console.log(`Filter applied with price: ${prices[selectedPrice]}`);
+        onFilterApply(prices[selectedPrice]);
+    };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Price</Text>
       <View style={styles.priceContainer}>
-        {prices.map((price, index) => (
+      {Object.entries(prices).map(([price, index]) => (
           <View
             key={index}
             style={[
