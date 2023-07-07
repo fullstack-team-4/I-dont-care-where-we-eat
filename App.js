@@ -19,21 +19,21 @@ Amplify.configure(awsconfig);
 const Tab = createBottomTabNavigator();
 
 const theme = {
-  colors: {
-    primary: "#FF0000",
-    secondary: "#00FF00",
-    background: "#FFFFFF",
-    text: "#000000",
-  },
-  fonts: {
-    regular: "Arial",
-    bold: "Helvetica-Bold",
-  },
-  spacing: {
-    small: 8,
-    medium: 16,
-    large: 24,
-  },
+    colors: {
+        primary: '#FF0000',
+        secondary: '#00FF00',
+        background: '#FFFFFF',
+        text: '#000000',
+    },
+    fonts: {
+        regular: 'Arial',
+        bold: 'Helvetica-Bold',
+    },
+    spacing: {
+        small: 8,
+        medium: 16,
+        large: 24,
+    },
 };
 
 export default function App() {
