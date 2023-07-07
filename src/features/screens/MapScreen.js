@@ -16,7 +16,8 @@ import axios from 'axios';
 import { GOOGLE_MAPS_API_KEY } from '@env';
 import styled from 'styled-components/native';
 import { Spacer } from '../../components/spacers/spacer.component';
-import SearchInput from '../searchBar/SeachInput';
+import SearchInput from '../../features/searchBar/SeachInput';
+import { RestaurantInfoCard } from './RestaurantComponent';
 
 export default function MapScreen({ userLocation, restaurantData, filters }) {
     // state for user location
@@ -122,14 +123,15 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                     />
                 </SearchContainer>
                 <RestaurantList
-                    data={isFiltered ? restaurants : restaurantData}
-                    renderItem={({ item }) => (
-                        <View style={{ marginBottom: 16 }}>
-                            <RestaurantItem key={item.place_id}>
-                                {item.name}
-                            </RestaurantItem>
-                        </View>
-                    )}
+      data={restaurants}
+      renderItem={({ item }) => {
+    
+        return (
+          <Spacer position="bottom" size="large">
+            <RestaurantInfoCard key={item.place_id} {...item} />
+          </Spacer>
+        );
+      }}
                     keyExtractor={(item) => item.place_id}
                 />
                 <View style={styles.listViewButton}>
