@@ -133,7 +133,7 @@ const HomeScreenGuest = () => {
           })}
         >
           <Tab.Screen
-              name="Home"
+              name="Restaurants"
               options={{
                 headerTitle: () => <Logo />,
                 headerTitleAlign: "center",
