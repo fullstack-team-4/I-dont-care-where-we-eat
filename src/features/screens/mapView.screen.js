@@ -19,6 +19,7 @@ import { Spacer } from '../../components/spacers/spacer.component';
 import SearchInput from '../../features/searchBar/SeachInput';
 import { RestaurantInfoCard } from './RestaurantComponent';
 
+
 export default function MapScreen() {
     //state for user location
     const [location, setLocation] = useState(null);
@@ -31,6 +32,7 @@ export default function MapScreen() {
     //state for search query
     const [searchResults, setSearchResults] = useState([]);
     //need a state for after the search is completed
+
 
     const radius = 5 * 1609;
     const prevRestaurantsRef = useRef([]);
@@ -154,6 +156,7 @@ export default function MapScreen() {
         //LIST VIEW STATE
         return (
             <SafeArea>
+
                 <SearchContainer>
                     {/* pass the function as props */}
                     <SearchInput
@@ -304,3 +307,4 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
 });
+
