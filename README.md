@@ -4,6 +4,9 @@ Flo -
  npm install react-native-paper
  npm install react-native-vector-icons
  npm install react-native-star-rating
+ npm install react-native-vector-icons
+ npm install @expo/vector-icons@13.0.0
+ 
 Skyler - Installed Packages:
 npm install styled-components@latest
 expo install expo-location --npm
