@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import CuisineFilter from "./filters/CuisineFilter";
@@ -121,6 +121,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "gray",
   },
   filterText: {
     marginRight: 5,
