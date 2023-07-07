@@ -53,9 +53,7 @@ const HomeScreen = () => {
   return (
     <PaperProvider>
       <ThemeProvider theme={theme}>
-        {/* <FilterBar />
-        <DistanceSlider />
-        <RandomButton onPress={() => console.log("boop")} /> */}
+        
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ size, color }) => {
