@@ -73,22 +73,6 @@ export const HomeScreen = ({ restaurantData }) => {
         handlePriceFilter,
         handleRatingFilter,
     };
-
-    const handleRandomButtonPress = () => {
-        if (restaurants.length > 0) {
-          const filteredRestaurants = restaurants.filter((restaurant) =>
-            selectedCuisines.includes(restaurant.cuisine)
-          );
-      
-          if (filteredRestaurants.length > 0) {
-            const randomIndex = Math.floor(Math.random() * filteredRestaurants.length);
-            const randomRestaurant = filteredRestaurants[randomIndex];
-            setRandomRestaurant(randomRestaurant);
-          } else {
-            setRandomRestaurant(null);
-          }
-        }
-      };
       
 
     useEffect(() => {

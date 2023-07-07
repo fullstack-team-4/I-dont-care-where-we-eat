@@ -5,6 +5,7 @@ import { GOOGLE_MAPS_API_KEY } from '@env';
 import CuisineFilter from "./filters/CuisineFilter";
 
 const ButtonContainer = styled(View)`
+  flex: 1;
   align-items: center;
   justify-content: flex-start;
   padding: 8px;
@@ -34,25 +35,6 @@ const ChangeFateText = styled(Text)`
   color: red;
 `;
 
-// handleRestaurantSearch = () => {
-//   const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-//   const location = `location=${userLocation.latitude},${userLocation.longitude}`;
-//   const radius = '&radius=2000';
-//   const type = '&keyword=restaurant';
-//   const key = `&key=${GOOGLE_MAPS_API_KEY}`;
-//   const restaurantSearchUrl = url + location + radius + type + key;
-
-//   fetch(restaurantSearchUrl)
-//     .then(response => response.json())
-//     .then(result => {
-//       // Update the restaurantData state with the fetched data
-//       setRestaurantData(result.results);
-//     })
-//     .catch(error => {
-//       console.error('Error fetching restaurant data:', error);
-//       Alert.alert('Error fetching restaurant data');
-//     });
-// };
 
 const RandomButton = ({ restaurants }) => {
   const [restaurant, setRandomRestaurant] = useState(null);
@@ -84,10 +66,11 @@ const RandomButton = ({ restaurants }) => {
               />
             ))}
           </ScrollView>
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{restaurant.name}</Text>
+          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{restaurant.name}</Text>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{restaurant.vicinity}</Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rating: {restaurant.rating}/5</Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Reviews: {restaurant.user_ratings_total}</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rating: {restaurant.rating} / 5     ({restaurant.user_ratings_total})</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Opening Hours: {restaurant.opening_hours && restaurant.opening_hours.open_now ? 'Open' : 'Closed'}</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Distance: {restaurant.distance} meters</Text>
           <ChangeFateText onPress={handlePress}>Click here to change your fate ¯\_(ツ)_/¯ </ChangeFateText>
         </View>
       ) : (
