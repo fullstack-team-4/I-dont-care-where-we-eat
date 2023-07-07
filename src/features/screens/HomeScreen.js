@@ -43,27 +43,27 @@ export const HomeScreen = ({ restaurantData }) => {
 
     const handleDistanceFilter = (selectedDistance) => {
         setDistanceFilter(selectedDistance);
-        console.log(selectedDistance);
+        // console.log('selectedDistance, HomeScreen.js', selectedDistance);
     };
 
     const handleOpenFilter = (isEnabled) => {
         setIsOpen(!isEnabled);
-        // console.log(isOpen);
+        // console.log('isOpen, HomeScreen.js', isOpen);
     };
 
     const handleCuisineFilter = (selectedCuisines) => {
         setCuisineFilters(selectedCuisines);
-        // console.log(selectedCuisines);
+        // console.log('selectedCuisines, HomeScreen.js', selectedCuisines);
     };
 
     const handlePriceFilter = (selectedPrices) => {
         setPriceFilters(selectedPrices);
-        // console.log(selectedPrices);
+        // console.log('selectedPrices, HomeScreen.js', selectedPrices);
     };
 
     const handleRatingFilter = (selectedRating) => {
         setRatingFilter(selectedRating);
-        // console.log(selectedRating);
+        // console.log('selectedRating, HomeScreen.js', selectedRating);
     };
 
     const filters = {
