@@ -73,20 +73,14 @@ export const HomeScreen = ({ restaurantData }) => {
         handlePriceFilter,
         handleRatingFilter,
     };
-
-    const handleRandomButtonPress = () => {
-        if (restaurants.length > 0) {
-            const randomIndex = Math.floor(Math.random() * restaurants.length);
-            const randomRestaurant = restaurants[randomIndex];
-            setRandomRestaurant(randomRestaurant);
-        }
-    };
+      
 
     useEffect(() => {
         if (randomRestaurant) {
             console.log('Random restaurant:', randomRestaurant);
         }
     }, [randomRestaurant]);
+    console.log(restaurantData);
 
     return (
         <SafeArea>
@@ -101,7 +95,8 @@ export const HomeScreen = ({ restaurantData }) => {
                     defaultValue={distanceFilter}
                     onFilterApply={handleDistanceFilter}
                 />
-                <RandomButton restaurants={restaurantData} />
+                <RandomButton restaurants={restaurantData}
+                 />
             </ScrollView>
         </SafeArea>
     );
