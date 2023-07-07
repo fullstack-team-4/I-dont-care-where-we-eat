@@ -45,6 +45,7 @@ export const ForgotPasswordScreen = () => {
         rules={{
           required:'Username is required'
         }}
+        customHeight={'15%'}
       />
       
       <CustomButton

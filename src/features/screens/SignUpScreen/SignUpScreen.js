@@ -119,7 +119,7 @@ export const SignUpScreen = () => {
         <Text style={styles.link} onPress={onTermsOfUsePressed}>Terms of Use</Text> and {' '}
         <Text style={styles.link} onPress={onPrivacyPressed}>Privacy Policy</Text>
       </Text>
-      <SocialSignInButtons/>
+      
       
       <CustomButton
         text="Have an account? Sign in"

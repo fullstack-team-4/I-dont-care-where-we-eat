@@ -7,7 +7,7 @@ import {
   Alert,
 } from "react-native";
 import React, { useState } from "react";
-import Logo from "../../../../assets/favicon.png";
+import logo from "../../../../assets/IDC_Logo.png"
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
@@ -43,7 +43,22 @@ export const SignInScreen = () => {
 
     setLoading(false)
   };
-
+  
+  const onSignInGuess = () => {
+    if (loading) {
+      return;
+    }
+  
+    setLoading(true);
+    try {
+      navigation.navigate("GuestHome");
+    } catch (e) {
+      Alert.alert("Oops", e.message);
+    }
+  
+    setLoading(false);
+  };
+  
   const onForgotPasswordPressed = () => {
     navigation.navigate("ForgotPassword");
   };
@@ -54,7 +69,7 @@ export const SignInScreen = () => {
   return (
     <View style={styles.root}>
       <Image
-        source={Logo}
+        source={logo}
         style={[styles.logo, { height: height * 0.3 }]}
         resizeMode="contain"
       />
@@ -72,12 +87,18 @@ export const SignInScreen = () => {
         rules={{ required: "Password is required" }}
       />
       <CustomButton text={loading ? "Loading...":"Sign In"}onPress={handleSubmit(onSignInPressed)} />
+      
+      <CustomButton 
+      text={loading ? "Loading...":"Sign In As a Guest "}
+      onPress={onSignInGuess}
+      type="SECONDARY"/>
+      
       <CustomButton
         text="Forgot Password?"
         onPress={onForgotPasswordPressed}
         type="TERTIARY"
       />
-      <SocialSignInButtons />
+      
       <CustomButton
         text="Don't have an account? Create One "
         onPress={onSignUpPressed}

@@ -8,6 +8,7 @@ export const CustomInput = ({
   rules={},
   placeholder,
   secureTextEntry,
+  customHeight, 
 }) => {
   return (
     
@@ -20,7 +21,15 @@ export const CustomInput = ({
         render={({field:{value,onChange,onBlur},fieldState:{error}}) =>(
 
           <>
-          <View style={[styles.container,{borderColor:error ? 'red':"#e8e8e8"}]}>
+          <View
+            style={[
+              styles.container,
+              { borderColor: error ? 'red' : "#e8e8e8" },
+              customHeight && { height: customHeight }, // Conditionally apply custom height style
+            ]}
+          >
+          
+          
           <TextInput
           value={value}
           onChangeText ={onChange}
