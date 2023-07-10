@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Image, Text, View, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { GOOGLE_MAPS_API_KEY } from '@env';
-import CuisineFilter from "./filters/CuisineFilter";
 
 const ButtonContainer = styled(View)`
   flex: 1;
@@ -28,6 +27,7 @@ const RestaurantImage = styled(Image)`
   shadow-offset: 1px 1px;
   shadow-radius: 4px;
 `;
+
 const ChangeFateText = styled(Text)`
   margin-top: 30px;
   font-size: 16px;
@@ -35,14 +35,28 @@ const ChangeFateText = styled(Text)`
   color: red;
 `;
 
-
-const RandomButton = ({ restaurants }) => {
+const RandomButton = ({
+  restaurants,
+  cuisineFilters,
+  priceFilters,
+  ratingFilter,
+  distanceFilter,
+}) => {
   const [restaurant, setRandomRestaurant] = useState(null);
 
   const generateRandomRestaurant = () => {
-    if (restaurants.length > 0) {
-      const randomIndex = Math.floor(Math.random() * restaurants.length);
-      const randomRestaurant = restaurants[randomIndex];
+    let filteredRestaurants = restaurants;
+
+    if (cuisineFilters.length > 0) {
+      filteredRestaurants = filteredRestaurants.filter((restaurant) =>
+        cuisineFilters.includes(restaurant.cuisine)
+      );
+    }
+    // distance price open stuff later
+
+    if (filteredRestaurants.length > 0) {
+      const randomIndex = Math.floor(Math.random() * filteredRestaurants.length);
+      const randomRestaurant = filteredRestaurants[randomIndex];
       setRandomRestaurant(randomRestaurant);
     }
   };
@@ -51,6 +65,10 @@ const RandomButton = ({ restaurants }) => {
     console.log('Choosing fate');
     generateRandomRestaurant();
   };
+
+  useEffect(() => {
+    generateRandomRestaurant();
+  }, [cuisineFilters, priceFilters, ratingFilter, distanceFilter, restaurants]);
 
   return (
     <ButtonContainer>
@@ -66,11 +84,11 @@ const RandomButton = ({ restaurants }) => {
               />
             ))}
           </ScrollView>
-          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{restaurant.name}</Text>
+          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{restaurant.name} ({restaurant.opening_hours.open_now ? 'Open' : 'Closed'})</Text>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{restaurant.vicinity}</Text>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Rating: {restaurant.rating} / 5     ({restaurant.user_ratings_total})</Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Opening Hours: {restaurant.opening_hours && restaurant.opening_hours.open_now ? 'Open' : 'Closed'}</Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Distance: {restaurant.distance} meters</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>price level:{restaurant.price_level}</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>distance: {restaurant.distance}</Text>
           <ChangeFateText onPress={handlePress}>Click here to change your fate ¯\_(ツ)_/¯ </ChangeFateText>
         </View>
       ) : (
