@@ -6,6 +6,7 @@ import { Text } from 'react-native';
 import RandomButton from '../homepage/randomButton';
 import FilterBar from '../homepage/FilterBar';
 import DistanceFilter from '../homepage/filters/DistanceFilter';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SafeArea = styled(SafeAreaView)`
     flex: 1;
@@ -36,6 +37,9 @@ export const HomeScreen = ({ restaurantData }) => {
     const [distanceFilter, setDistanceFilter] = useState(5);
     const [isOpen, setIsOpen] = useState(false);
     const [activeFilter, setActiveFilter] = useState(null);
+
+console.log('This is PriceFilter--->', priceFilters)
+// console.log('This is RatingFilter--->', ratingFilter)
 
     const handleFilterChange = (filterName) => {
         setActiveFilter(filterName);
@@ -80,7 +84,7 @@ export const HomeScreen = ({ restaurantData }) => {
             console.log('Random restaurant:', randomRestaurant);
         }
     }, [randomRestaurant]);
-    console.log(restaurantData);
+    // console.log(restaurantData);
 
     return (
         <SafeArea>
@@ -90,6 +94,9 @@ export const HomeScreen = ({ restaurantData }) => {
                     activeFilter={activeFilter}
                     handleFilterChange={handleFilterChange}
                     handleOpenFilter={handleOpenFilter}
+                    isCuisineFilterApplied={cuisineFilters.length > 0}
+                    isPriceFilterApplied={priceFilters !== null}
+                    isRatingFilterApplied={ratingFilter !== null}
                 />
                 <DistanceFilter
                     defaultValue={distanceFilter}
