@@ -1,70 +1,74 @@
+import React, { useState } from "react";
 import {
   View,
   Text,
   Image,
   useWindowDimensions,
   StyleSheet,
-  Alert
+  Alert,
+  SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
+import { useForm } from "react-hook-form";
+import { Auth } from "aws-amplify";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { SocialSignInButtons } from "../../components/SocialSignInButtons/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
-import {useForm}  from 'react-hook-form'
-import {Auth} from 'aws-amplify'
-export const ForgotPasswordScreen = () => {
-  
-  const {control, handleSubmit} = useForm();
 
+export const ForgotPasswordScreen = () => {
+  const { control, handleSubmit } = useForm();
   const navigation = useNavigation();
 
   const onSignInPressed = () => {
-    navigation.navigate("SignIn")
+    navigation.navigate("SignIn");
   };
 
-  const onSendPressed = async data =>{
-
+  const onSendPressed = async (data) => {
     try {
-      await Auth.forgotPassword(data.username)
-      navigation.navigate("NewPassword",{username})
-    }catch(e){
-      Alert.alert("Oops", e.message)
+      await Auth.forgotPassword(data.username);
+      navigation.navigate("NewPassword", { username });
+    } catch (e) {
+      Alert.alert("Oops", e.message);
     }
-    
+  };
 
-  }
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}> Reset your Password</Text>
-      <CustomInput
-        name="username"
-        control={control}
-        placeholder="Username"
-        rules={{
-          required:'Username is required'
-        }}
-        customHeight={'15%'}
-      />
-      
-      <CustomButton
-        text="Send"
-        onPress={handleSubmit(onSendPressed)}
-        type="SECONDARY"
-      />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.root}>
+        <Text style={styles.title}>Reset your Password</Text>
+        <CustomInput
+          name="username"
+          control={control}
+          placeholder="Username"
+          rules={{
+            required: "Username is required",
+          }}
+          customHeight={"6%"}
+        />
 
-      <CustomButton
-        text="Back to Sign in"
-        onPress={onSignInPressed}
-        type="TERTIARY"
-      />
-    </View>
+        <CustomButton
+          text="Send"
+          onPress={handleSubmit(onSendPressed)}
+          type="SECONDARY"
+        />
+
+        <CustomButton
+          text="Back to Sign in"
+          onPress={onSignInPressed}
+          type="TERTIARY"
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   root: {
+    flex: 1,
     alignItems: "center",
     padding: 20,
   },
