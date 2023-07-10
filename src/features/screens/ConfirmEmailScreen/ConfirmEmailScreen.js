@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import {useForm} from 'react-hook-form'
 import {Auth} from "aws-amplify"
 import {useRoute} from '@react-navigation/native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ConfirmEmailScreen = () => {
   const route = useRoute();
@@ -47,7 +48,8 @@ export const ConfirmEmailScreen = () => {
       }
   };
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.safeArea}>
+<View style={styles.root}>
       <Text style={styles.title}> Confirm Your Email</Text>
 
       <CustomInput
@@ -81,11 +83,18 @@ export const ConfirmEmailScreen = () => {
         type="TERTIARY"
       />
     </View>
+
+    </SafeAreaView>
+    
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   root: {
+    flex:1,
     alignItems: "center",
     padding: 20,
   },

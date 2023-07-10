@@ -89,6 +89,8 @@ export const SignUpScreen = () => {
       name="email" placeholder="Email" control={control} 
         rules ={{pattern:EMAIL_REGEX, message:"Email is invalid"}}
       />
+
+
       <CustomInput
         placeholder="Password"
         name="password"
@@ -109,10 +111,13 @@ export const SignUpScreen = () => {
         control ={control}
         secureTextEntry
         rules={{
-          validate: value => value === pwd || "Passwrd do not match"
+          validate: value => value === pwd || "Passwords do not match"
 
         }}
       />
+      <Text style={styles.passwordRequirements}>
+      Password should be 8+ characters and include symbols, lowercase & uppercase letters, and numbers.
+      </Text>
       <CustomButton text="Register" onPress={handleSubmit(onRegisterPressed)} />
       <Text style={styles.text}>
         By registering, you confirm that you accept our{" "}
@@ -133,7 +138,9 @@ export const SignUpScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
+    flex:1,
     alignItems: "center",
+    justifyContent: "center",
     padding: 20,
   },
   logo: {
@@ -153,5 +160,11 @@ const styles = StyleSheet.create({
   },
   link:{
     color:'#FDB075',
-  }
+  },
+  passwordRequirements: {
+    color: "gray",
+    marginBottom: 
+    20,
+    textAlign: "center",
+  },
 });

@@ -28,9 +28,15 @@ const RestaurantItem = styled(Text)`
     margin-bottom: 8px;
 `;
 
-export const HomeScreen = ({ restaurantData }) => {
+export const HomeScreen = ({
+    userLocation,
+    restaurantData,
+    filters,
+    states,
+}) => {
     const [randomRestaurant, setRandomRestaurant] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
+
     const [cuisineFilters, setCuisineFilters] = useState([]);
     const [priceFilters, setPriceFilters] = useState(null);
     const [ratingFilter, setRatingFilter] = useState(null);
@@ -89,21 +95,12 @@ console.log('This is PriceFilter--->', priceFilters)
     return (
         <SafeArea>
             <ScrollView>
-                <FilterBar
-                    filters={filters}
-                    activeFilter={activeFilter}
-                    handleFilterChange={handleFilterChange}
-                    handleOpenFilter={handleOpenFilter}
-                    isCuisineFilterApplied={cuisineFilters.length > 0}
-                    isPriceFilterApplied={priceFilters !== null}
-                    isRatingFilterApplied={ratingFilter !== null}
-                />
-                <DistanceFilter
-                    defaultValue={distanceFilter}
-                    onFilterApply={handleDistanceFilter}
-                />
-                <RandomButton restaurants={restaurantData}
-                 />
+                <FilterBar filters={filters}
+                  isCuisineFilterApplied={cuisineFilters.length > 0}
+                  isPriceFilterApplied={priceFilters !== null}
+                  isRatingFilterApplied={ratingFilter !== null} />
+                <DistanceFilter defaultValue={states} filters={filters} />
+                <RandomButton restaurants={restaurantData} />
             </ScrollView>
         </SafeArea>
     );

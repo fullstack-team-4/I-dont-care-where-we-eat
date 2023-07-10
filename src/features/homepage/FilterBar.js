@@ -28,7 +28,7 @@ const FilterBar = ({
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => {
-            handleFilterChange("open");
+            filters.handleFilterChange("open");
             refRBsheetOpen.current.open();
           }}
         >
@@ -40,7 +40,7 @@ const FilterBar = ({
             isCuisineFilterApplied ? styles.appliedFilter : null,
           ]}
           onPress={() => {
-            handleFilterChange("cuisine");
+            filters.handleFilterChange("cuisine");
             refRBsheetCuisine.current.open();
           }}
         >
@@ -53,7 +53,7 @@ const FilterBar = ({
             isPriceFilterApplied ? styles.appliedFilter : null,
           ]}
           onPress={() => {
-            handleFilterChange("price");
+            filters.handleFilterChange("price");
             refRBsheetPrice.current.open();
           }}
         >
@@ -66,7 +66,7 @@ const FilterBar = ({
             isRatingFilterApplied ? styles.appliedFilter : null,
           ]}
           onPress={() => {
-            handleFilterChange("rating");
+            filters.handleFilterChange("rating");
             refRBsheetRating.current.open();
           }}
         >

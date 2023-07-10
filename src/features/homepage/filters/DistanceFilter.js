@@ -4,7 +4,7 @@ import Slider from '@react-native-community/slider';
 
 const meterConversion = 1609.34; //meters in a mile
 
-const DistanceFilter = ({ onFilterApply }) => {
+const DistanceFilter = ({ filters }) => {
     const [distance, setDistance] = useState(5);
 
     const handleDistanceFilter = (value) => {
@@ -13,7 +13,7 @@ const DistanceFilter = ({ onFilterApply }) => {
 
     const applyDistanceFilter = () => {
         const freedomUnits = distance * meterConversion;
-        onFilterApply(Math.floor(freedomUnits));
+        filters.handleDistanceFilter(Math.floor(freedomUnits));
     };
 
     return (
