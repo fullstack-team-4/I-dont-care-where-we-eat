@@ -9,7 +9,7 @@ import {
     RatingFilter,
 } from './filters';
 
-const FilterBar = ({ filters, handleFilterChange }) => {
+const FilterBar = ({ filters }) => {
     const refRBsheetOpen = useRef();
     const refRBsheetCuisine = useRef();
     const refRBsheetPrice = useRef();
@@ -22,7 +22,7 @@ const FilterBar = ({ filters, handleFilterChange }) => {
                 <TouchableOpacity
                     style={styles.filterButton}
                     onPress={() => {
-                        handleFilterChange('open');
+                        filters.handleFilterChange('open');
                         refRBsheetOpen.current.open();
                     }}>
                     <Text>Open</Text>
@@ -30,7 +30,7 @@ const FilterBar = ({ filters, handleFilterChange }) => {
                 <TouchableOpacity
                     style={styles.filterButton}
                     onPress={() => {
-                        handleFilterChange('cuisine');
+                        filters.handleFilterChange('cuisine');
                         refRBsheetCuisine.current.open();
                     }}>
                     <Text style={styles.filterText}>Cuisines</Text>
@@ -43,7 +43,7 @@ const FilterBar = ({ filters, handleFilterChange }) => {
                 <TouchableOpacity
                     style={styles.filterButton}
                     onPress={() => {
-                        handleFilterChange('price');
+                        filters.handleFilterChange('price');
                         refRBsheetPrice.current.open();
                     }}>
                     <Text style={styles.filterText}>Price</Text>
@@ -56,7 +56,7 @@ const FilterBar = ({ filters, handleFilterChange }) => {
                 <TouchableOpacity
                     style={styles.filterButton}
                     onPress={() => {
-                        handleFilterChange('rating');
+                        filters.handleFilterChange('rating');
                         refRBsheetRating.current.open();
                     }}>
                     <Text style={styles.filterText}>Rating</Text>
