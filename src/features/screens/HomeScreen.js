@@ -36,6 +36,59 @@ export const HomeScreen = ({
     const [randomRestaurant, setRandomRestaurant] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
 
+    const [cuisineFilters, setCuisineFilters] = useState([]);
+    const [priceFilters, setPriceFilters] = useState(null);
+    const [ratingFilter, setRatingFilter] = useState(null);
+    const [distanceFilter, setDistanceFilter] = useState(5);
+    const [isOpen, setIsOpen] = useState(false);
+    const [activeFilter, setActiveFilter] = useState(null);
+
+    const handleFilterChange = (filterName) => {
+        setActiveFilter(filterName);
+    };
+
+    const handleDistanceFilter = (selectedDistance) => {
+        setDistanceFilter(selectedDistance);
+        // console.log('selectedDistance, HomeScreen.js', selectedDistance);
+    };
+
+    const handleOpenFilter = (isEnabled) => {
+        setIsOpen(!isEnabled);
+        // console.log('isOpen, HomeScreen.js', isOpen);
+    };
+
+    const handleCuisineFilter = (selectedCuisines) => {
+        setCuisineFilters(selectedCuisines);
+        // console.log('selectedCuisines, HomeScreen.js', selectedCuisines);
+    };
+
+    const handlePriceFilter = (selectedPrices) => {
+        setPriceFilters(selectedPrices);
+        // console.log('selectedPrices, HomeScreen.js', selectedPrices);
+    };
+
+    const handleRatingFilter = (selectedRating) => {
+        setRatingFilter(selectedRating);
+        // console.log('selectedRating, HomeScreen.js', selectedRating);
+    };
+
+    const filters = {
+        handleDistanceFilter,
+        handleOpenFilter,
+        handleCuisineFilter,
+        handlePriceFilter,
+        handleRatingFilter,
+    };
+      
+
+    useEffect(() => {
+        if (randomRestaurant) {
+            console.log('Random restaurant:', randomRestaurant);
+        }
+    }, [randomRestaurant]);
+    // console.log(restaurantData);
+
+
     return (
         <SafeArea>
             <ScrollView>
