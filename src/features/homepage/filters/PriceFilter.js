@@ -4,10 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PriceFilter = ({ onFilterApply }) => {
     const prices = {
-        $: 0,
-        $$: 1,
-        $$$: 2,
-        $$$$: 3,
+        $: '0',
+        $$: '1',
+        $$$: '2',
+        $$$$: '3',
     };
 
     const [selectedPrice, setSelectedPrice] = useState(null);
