@@ -89,7 +89,7 @@ export const SignInScreen = () => {
       <CustomButton text={loading ? "Loading...":"Sign In"}onPress={handleSubmit(onSignInPressed)} />
       
       <CustomButton 
-      text={loading ? "Loading...":"Sign In As a Guest "}
+      text="Sign In As a Guest "
       onPress={onSignInGuess}
       type="SECONDARY"/>
       
@@ -110,7 +110,9 @@ export const SignInScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
+    flex:1,
     alignItems: "center",
+    justifyContent: "center",
     padding: 20,
   },
   logo: {
