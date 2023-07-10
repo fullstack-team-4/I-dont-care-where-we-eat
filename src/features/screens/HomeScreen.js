@@ -80,7 +80,7 @@ export const HomeScreen = ({ restaurantData }) => {
             console.log('Random restaurant:', randomRestaurant);
         }
     }, [randomRestaurant]);
-    console.log(restaurantData);
+    // console.log(restaurantData);
 
     return (
         <SafeArea>
