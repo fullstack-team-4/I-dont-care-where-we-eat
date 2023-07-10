@@ -4,17 +4,21 @@ import {
 Alert,
   StyleSheet,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation ,useRoute} from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { Auth } from "aws-amplify";
 export const NewPasswordScreen = () => {
   const { control, handleSubmit } = useForm();
-
   const navigation = useNavigation();
+  const route = useRoute();
+  const { username } = route.params; 
+
+ 
+
 
   const onSignInPressed = () => {
     navigation.navigate("SignIn");
@@ -34,11 +38,14 @@ export const NewPasswordScreen = () => {
 
   return (
     <View style={styles.root}>
-      <Text style={styles.title}> Reset your Password</Text>
+      <Text style={styles.title}> New Password</Text>
       <CustomInput
+
         placeholder="Username"
         name="username"
         control={control}
+        defaultValue={username}
+    
         rules={{ required: "Username is required" }}
       />
 

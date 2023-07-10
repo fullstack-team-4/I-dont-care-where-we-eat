@@ -27,7 +27,7 @@ export const ForgotPasswordScreen = () => {
   const onSendPressed = async (data) => {
     try {
       await Auth.forgotPassword(data.username);
-      navigation.navigate("NewPassword", { username });
+      navigation.navigate("NewPassword", { username:data.username });
     } catch (e) {
       Alert.alert("Oops", e.message);
     }
@@ -44,7 +44,7 @@ export const ForgotPasswordScreen = () => {
           rules={{
             required: "Username is required",
           }}
-          customHeight={"6%"}
+          customHeight={"7%"}
         />
 
         <CustomButton
