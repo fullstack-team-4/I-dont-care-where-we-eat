@@ -1,15 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-
 import MapScreen from '../MapScreen';
 import { SettingsScreen } from '../Settings/SettingsScreen';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { ThemeProvider } from 'styled-components';
-
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { HomeScreen } from '../HomeScreen';
-
 import Logo from '../../homepage/Logo';
 
 const Tab = createBottomTabNavigator();
@@ -38,7 +35,7 @@ const theme = {
     },
 };
 
-const Homeicons = ({ userLocation, restaurantData, filters, states }) => {
+const Homeicons = ({ filters, states }) => {
     return (
         <PaperProvider>
             <ThemeProvider theme={theme}>
@@ -68,8 +65,6 @@ const Homeicons = ({ userLocation, restaurantData, filters, states }) => {
                         }}>
                         {() => (
                             <HomeScreen
-                                userLocation={userLocation}
-                                restaurantData={restaurantData}
                                 filters={filters}
                                 states={states}
                             />
@@ -79,8 +74,6 @@ const Homeicons = ({ userLocation, restaurantData, filters, states }) => {
                     <Tab.Screen name="Map">
                         {() => (
                             <MapScreen
-                                userLocation={userLocation}
-                                restaurantData={restaurantData}
                                 filters={filters}
                                 states={states}
                             />
