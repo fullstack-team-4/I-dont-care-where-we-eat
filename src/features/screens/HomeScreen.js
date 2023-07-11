@@ -27,9 +27,15 @@ const RestaurantItem = styled(Text)`
     margin-bottom: 8px;
 `;
 
-export const HomeScreen = ({ restaurantData }) => {
+export const HomeScreen = ({
+    userLocation,
+    restaurantData,
+    filters,
+    states,
+}) => {
     const [randomRestaurant, setRandomRestaurant] = useState(null);
     const [restaurants, setRestaurants] = useState([]);
+
     const [cuisineFilters, setCuisineFilters] = useState([]);
     const [priceFilters, setPriceFilters] = useState(null);
     const [ratingFilter, setRatingFilter] = useState(null);
@@ -82,21 +88,13 @@ export const HomeScreen = ({ restaurantData }) => {
     }, [randomRestaurant]);
     // console.log(restaurantData);
 
+
     return (
         <SafeArea>
             <ScrollView>
-                <FilterBar
-                    filters={filters}
-                    activeFilter={activeFilter}
-                    handleFilterChange={handleFilterChange}
-                    handleOpenFilter={handleOpenFilter}
-                />
-                <DistanceFilter
-                    defaultValue={distanceFilter}
-                    onFilterApply={handleDistanceFilter}
-                />
-                <RandomButton restaurants={restaurantData}
-                 />
+                <FilterBar filters={filters} />
+                <DistanceFilter defaultValue={states} filters={filters} />
+                <RandomButton restaurants={restaurantData} />
             </ScrollView>
         </SafeArea>
     );
