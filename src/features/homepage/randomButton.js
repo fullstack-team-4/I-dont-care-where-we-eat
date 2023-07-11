@@ -1,44 +1,68 @@
-import React, { useState } from "react";
-import { TouchableOpacity, Image, Text, View } from "react-native";
-import styled from "styled-components/native";
+import React, { useState } from 'react';
+import { TouchableOpacity, Image, Text, View } from 'react-native';
+import styled from 'styled-components/native';
+import { GOOGLE_MAPS_API_KEY } from '@env';
+import { RestaurantInfoCard } from '../screens/RestaurantComponent';
 
-const ButtonContainer = styled(TouchableOpacity)`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
+const ButtonContainer = styled(View)`
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px;
+    border-radius: 8px;
+
+    shadow-color: #000;
+    shadow-opacity: 0.5;
+    shadow-offset: 0px 2px;
+    shadow-radius: 4px;
+    elevation: 2;
 `;
 
-const RandomButton = ({ restaurants }) => {
-  const [randomRestaurant, setRandomRestaurant] = useState(null);
+const ChangeFateText = styled(Text)`
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+`;
 
-  const generateRandomRestaurant = () => {
-    if (restaurants.length > 0) {
-      const randomIndex = Math.floor(Math.random() * restaurants.length);
-      const randomRestaurant = restaurants[randomIndex];
-      setRandomRestaurant(randomRestaurant);
-    }
-  };
-  
+const RandomButton = ({ states }) => {
+    const [restaurant, setRandomRestaurant] = useState(null);
+    const generateRandomRestaurant = () => {
+        if (states.restaurantData.length > 0) {
+            const randomIndex = Math.floor(
+                Math.random() * states.restaurantData.length
+            );
+            const randomRestaurant = states.restaurantData[randomIndex];
+            setRandomRestaurant(randomRestaurant);
+        }
+    };
+
   const handlePress = () => {
+    console.log('Choosing fate');
     generateRandomRestaurant();
   };
 
   return (
-    <ButtonContainer onPress={handlePress}>
-      {randomRestaurant ? (
+    <ButtonContainer>
+      {restaurant ? (
         <View>
-          <Text> Tap again for a different fate</Text>
-          <Text>{randomRestaurant.name}</Text>
-          <Text>Rating: {randomRestaurant.rating}</Text>
-          
-          {/* ADD PRICE AND IMG LATER */}
+          <RestaurantInfoCard
+            name={restaurant.name}
+            rating={restaurant.rating}
+            isClosedTemporarily={restaurant.isClosedTemporarily}
+            opening_hours={restaurant.opening_hours}
+            vicinity={restaurant.vicinity}
+            photos={restaurant.photos}
+          />
+          <ChangeFateText onPress={handlePress}>Click here to change your fate ¯\_(ツ)_/¯ </ChangeFateText>
         </View>
       ) : (
-        <Image
-          source={require("../../../assets/idc2.png")}
-          style={{ width: 300, height: 300 }}
-        />
+        <TouchableOpacity activeOpacity={1} onPress={handlePress}>
+          <Image
+            source={require("../../../assets/idc2.png")}
+            style={{ width: 300, height: 300 }}
+          />
+        </TouchableOpacity>
       )}
     </ButtonContainer>
   );

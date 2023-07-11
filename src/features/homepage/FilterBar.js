@@ -1,110 +1,151 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
-import CuisineFilter from "./filters/CuisineFilter";
-import OpenFilter from "./filters/OpenFilter";
-import PriceFilter from "./filters/PriceFilter";
-import RatingFilter from "./filters/RatingFilter";
+import { MaterialIcons } from '@expo/vector-icons';
+import React, { useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import {
+    CuisineFilter,
+    OpenFilter,
+    PriceFilter,
+    RatingFilter,
+} from './filters';
 
-const FilterBar = () => {
-  const refRBsheet = useRef();
-  const [activeFilter, setActiveFilter] = useState(null);
+const FilterBar = ({ filters }) => {
+    const refRBsheetOpen = useRef();
+    const refRBsheetCuisine = useRef();
+    const refRBsheetPrice = useRef();
+    const refRBsheetRating = useRef();
+    // const refRBsheetDistance = useRef();
 
-  const openFilter = (filterType) => {
-    setActiveFilter(filterType);
-    refRBsheet.current.open();
-  };
+    return (
+        <View>
+            <View style={styles.filterBar}>
+                <TouchableOpacity
+                    style={styles.filterButton}
+                    onPress={() => {
+                        filters.handleFilterChange('open');
+                        refRBsheetOpen.current.open();
+                    }}>
+                    <Text>Open</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.filterButton}
+                    onPress={() => {
+                        filters.handleFilterChange('cuisine');
+                        refRBsheetCuisine.current.open();
+                    }}>
+                    <Text style={styles.filterText}>Cuisines</Text>
+                    <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={20}
+                        color="black"
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.filterButton}
+                    onPress={() => {
+                        filters.handleFilterChange('price');
+                        refRBsheetPrice.current.open();
+                    }}>
+                    <Text style={styles.filterText}>Price</Text>
+                    <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={20}
+                        color="black"
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.filterButton}
+                    onPress={() => {
+                        filters.handleFilterChange('rating');
+                        refRBsheetRating.current.open();
+                    }}>
+                    <Text style={styles.filterText}>Rating</Text>
+                    <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={20}
+                        color="black"
+                    />
+                </TouchableOpacity>
+            </View>
 
-  const getFilterContent = () => {
-    switch (activeFilter) {
-      case "open":
-        return <OpenFilter />;
-      case "cuisines":
-        return <CuisineFilter />;
-      case "price":
-        return <PriceFilter />;
-      case "rating":
-        return <RatingFilter />;
-      default:
-        return null;
-    }
-  };
+            <RBSheet
+                ref={refRBsheetOpen}
+                closeOnDragDown={true}
+                height={250}
+                customStyles={{
+                    container: {
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    },
+                }}>
+                <OpenFilter onFilterApply={filters.handleOpenFilter} />
+            </RBSheet>
 
-  return (
-    <View>
-      <View
-        // { Top navigation bar }
-        style={styles.filterBar}
-      >
-        <TouchableOpacity
-          style={styles.filterButton}
-          onPress={() => openFilter("open")}
-        >
-          <Text>Open</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.filterButton}
-          onPress={() => openFilter("cuisines")}
-        >
-          <Text style={styles.filterText}>Cuisines</Text>
-          <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.filterButton}
-          onPress={() => openFilter("price")}
-        >
-          <Text style={styles.filterText}>Price</Text>
-          <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.filterButton}
-          onPress={() => openFilter("rating")}
-        >
-          <Text style={styles.filterText}>Rating</Text>
-          <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
-        </TouchableOpacity>
-      </View>
+            <RBSheet
+                ref={refRBsheetCuisine}
+                closeOnDragDown={true}
+                height={480}
+                customStyles={{
+                    container: {
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    },
+                }}>
+                <CuisineFilter onFilterApply={filters.handleCuisineFilter} />
+            </RBSheet>
 
-      {/* Bottom Sheet component */}
-      <RBSheet
-        ref={refRBsheet}
-        closeOnDragDown={true}
-        height={300}
-        customStyles={{
-          container: {
-            justifyContent: "center",
-            alignItems: "center",
-          },
-        }}
-      >
-        {getFilterContent()}
-      </RBSheet>
-    </View>
-  );
+            <RBSheet
+                ref={refRBsheetPrice}
+                closeOnDragDown={true}
+                height={250}
+                customStyles={{
+                    container: {
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    },
+                }}>
+                <PriceFilter onFilterApply={filters.handlePriceFilter} />
+            </RBSheet>
+
+            <RBSheet
+                ref={refRBsheetRating}
+                closeOnDragDown={true}
+                height={250}
+                customStyles={{
+                    container: {
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    },
+                }}>
+                <RatingFilter onFilterApply={filters.handleRatingFilter} />
+            </RBSheet>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  filterBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    marginBottom: 10,
-    backgroundColor: "#eeeeee",
-    height: 50,
-    borderRadius: 25,
-  },
+    filterBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        marginBottom: 10,
+        backgroundColor: '#eeeeee',
+        height: 50,
+        borderRadius: 25,
+    },
 
-  filterButton: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 20,
-    alignItems: "center",
-  },
-  filterText: {
-    marginRight: 5,
-  },
+    filterButton: {
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 20,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: 'gray',
+    },
+    filterText: {
+        marginRight: 5,
+    },
 });
 
 export default FilterBar;
