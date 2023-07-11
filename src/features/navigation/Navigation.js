@@ -1,8 +1,7 @@
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { SignInScreen } from '../screens/SignInScreen/SignInScreen';
 import { SignUpScreen } from '../screens/SignUpScreen/SignUpScreen';
 import { ConfirmEmailScreen } from '../screens/ConfirmEmailScreen/ConfirmEmailScreen';
@@ -14,12 +13,7 @@ import HomeScreenGuest from '../screens/HomeIcons/HomeScreenGuest';
 
 const Stack = createNativeStackNavigator();
 
-export const Navigation = ({
-    userLocation,
-    restaurantData,
-    filters,
-    states,
-}) => {
+export const Navigation = ({ filters, states }) => {
     const [user, setUser] = useState(undefined);
 
     const checkUser = async () => {
@@ -68,14 +62,7 @@ export const Navigation = ({
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {user ? (
                     <Stack.Screen name="Home">
-                        {() => (
-                            <Homeicons
-                                userLocation={userLocation}
-                                restaurantData={restaurantData}
-                                filters={filters}
-                                states={states}
-                            />
-                        )}
+                        {() => <Homeicons filters={filters} states={states} />}
                     </Stack.Screen>
                 ) : (
                     <>
@@ -96,8 +83,6 @@ export const Navigation = ({
                         <Stack.Screen name="GuestHome">
                             {() => (
                                 <HomeScreenGuest
-                                    userLocation={userLocation}
-                                    restaurantData={restaurantData}
                                     filters={filters}
                                     states={states}
                                 />

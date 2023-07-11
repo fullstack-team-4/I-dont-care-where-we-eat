@@ -19,16 +19,11 @@ import { Spacer } from '../../components/spacers/spacer.component';
 import SearchInput from '../../features/searchBar/SeachInput';
 import { RestaurantInfoCard } from './RestaurantComponent';
 
-export default function MapScreen({
-    userLocation,
-    restaurantData,
-    filters,
-    states,
-}) {
+export default function MapScreen({ states }) {
     // state for user location
-    const [location, setLocation] = useState(userLocation);
+    const [location, setLocation] = useState(states.userLocation);
     // state for restaurants data
-    const [restaurants, setRestaurants] = useState(restaurantData);
+    const [restaurants, setRestaurants] = useState([]);
     // state for loading
     const [loading, setLoading] = useState(false);
     // state for list view
@@ -63,15 +58,15 @@ export default function MapScreen({
     };
 
     useEffect(() => {
-        setRestaurants(restaurantData);
-    }, [restaurantData]);
+        setRestaurants(states.restaurantData);
+    }, [states.restaurantData]);
 
     // Callback function to take in the input from the SearchInput component
     const handleSearch = (query) => {
         setIsFiltered(true);
         prevRestaurantsRef.current = restaurants;
         const apiKey = GOOGLE_MAPS_API_KEY;
-        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${userLocation.latitude},${userLocation.longitude}&radius=${states.distanceFilter}&type=restaurant&key=${apiKey}`;
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${states.userLocation.latitude},${states.userLocation.longitude}&radius=${states.distanceFilter}&type=restaurant&key=${apiKey}`;
 
         axios
             .get(url)
@@ -95,7 +90,7 @@ export default function MapScreen({
         setListView((prevListView) => !prevListView);
     };
 
-    if (!userLocation || loading) {
+    if (!states.userLocation || loading) {
         return (
             <ActivityIndicator style={styles.loadingContainer} size="large" />
         );
@@ -162,13 +157,13 @@ export default function MapScreen({
                     <ActivityIndicator size="large" color="gray" />
                 </View>
             ) : null}
-            {userLocation ? (
+            {states.userLocation ? (
                 <MapView
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
-                    region={userLocation}>
+                    region={states.userLocation}>
                     <Circle
-                        center={userLocation}
+                        center={states.userLocation}
                         radius={states.distanceFilter}
                         strokeColor="#0084ff"
                         fillColor="rgba(102,204,255,0.3)"
@@ -180,7 +175,7 @@ export default function MapScreen({
                         pinColor="#0066ff"
                     />
 
-                    {(isFiltered ? restaurants : restaurantData).map(
+                    {(isFiltered ? restaurants : states.restaurantData).map(
                         (restaurant) => (
                             <Marker
                                 key={restaurant.place_id}

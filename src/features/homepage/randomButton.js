@@ -25,12 +25,14 @@ const ChangeFateText = styled(Text)`
     color: red;
 `;
 
-const RandomButton = ({ restaurants }) => {
+const RandomButton = ({ states }) => {
     const [restaurant, setRandomRestaurant] = useState(null);
     const generateRandomRestaurant = () => {
-        if (restaurants.length > 0) {
-            const randomIndex = Math.floor(Math.random() * restaurants.length);
-            const randomRestaurant = restaurants[randomIndex];
+        if (states.restaurantData.length > 0) {
+            const randomIndex = Math.floor(
+                Math.random() * states.restaurantData.length
+            );
+            const randomRestaurant = states.restaurantData[randomIndex];
             setRandomRestaurant(randomRestaurant);
         }
     };
