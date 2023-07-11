@@ -23,7 +23,7 @@ const DistanceFilter = ({ filters }) => {
                 alignItems: 'stretch',
                 justifyContent: 'center',
             }}>
-            <Text style={{ textAlign: 'center' }}>{distance} miles</Text>
+            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, color: 'red' }}>{distance} miles</Text>
             <Slider
                 minimumValue={1}
                 maximumValue={20}
@@ -31,6 +31,7 @@ const DistanceFilter = ({ filters }) => {
                 value={distance}
                 onSlidingComplete={applyDistanceFilter}
                 onValueChange={handleDistanceFilter}
+                
             />
         </View>
     );
