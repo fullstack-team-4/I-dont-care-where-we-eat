@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Text, Image, View } from "react-native";
+import { Text, Image, View, TouchableOpacity, Linking } from "react-native";
 import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 
@@ -26,8 +26,9 @@ const Address = styled(Text)`
 
 const Title = styled(Text)`
   font-family: "Lato_400Regular";
-  font-size: 16px;
+  font-size: 30px;
   color: black;
+  font-weight: bold;
 `;
 
 const Info = styled.View`
@@ -51,8 +52,18 @@ const SectionEnd = styled.View`
   justify-content: flex-end;
 `;
 
+const RowContainer = styled(View)`
+  flex-direction: row;
+  align-items: center;
+`;
 
-export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_hours, vicinity, photos, icon }) => {
+const LinkIcon = styled(Image)`
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+`;
+
+export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_hours, vicinity, photos, icon, user_ratings_total }) => {
     const reference = photos[0]?.photo_reference;
     const apiKey = "AIzaSyB4mhr5mWVDKq3VQrGmloq91Be4KTi9LT8";
     let photoUrl = null;
@@ -68,6 +79,11 @@ export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_
     ));
   
     const { open_now } = opening_hours || {};
+
+    const openGoogleMaps = () => {
+      const url = `https://www.google.com/maps/place/?q=place_id:${vicinity}`;
+      Linking.openURL(url);
+    };
   
     return (
       <RestaurantCard elevation={5}>
@@ -83,7 +99,7 @@ export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_
             <Rating>
               {starComponents}
             </Rating>
-            <Text>{rating}</Text>
+            <Text>{rating}  ({user_ratings_total})</Text>
             <SectionEnd>
               <Spacer position="left" size="large">
                 {open_now && <SvgXml xml={open} width={30} height={25} />}
@@ -101,8 +117,14 @@ export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_
                 <Text variant="label" style={{ color: "red" }}>
                   CLOSED
                 </Text>
-              )}
+              )} 
             </View>
+            <TouchableOpacity onPress={openGoogleMaps}>
+              <LinkIcon source={require("../../../assets/gmap.png")} />
+            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={openPhoneNumber}>
+              <LinkIcon source={require("../../../assets/phone.webp")} />
+            </TouchableOpacity> */}
           </Address>
         </Info>
       </RestaurantCard>
