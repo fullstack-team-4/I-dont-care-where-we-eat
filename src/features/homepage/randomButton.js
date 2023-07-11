@@ -15,15 +15,6 @@ const ButtonContainer = styled(View)`
     elevation: 2;
 `;
 
-const ChangeFateText = styled(Text)`
-    font-size: 30px;
-    font-weight: bold;
-    color: red;
-    text-align: center;
-    border: black;
-    background-color: white;
-    `;
-
 
 const RandomButton = ({ states }) => {
   const [restaurant, setRandomRestaurant] = useState(null);
@@ -55,12 +46,11 @@ const RandomButton = ({ states }) => {
             vicinity={restaurant.vicinity}
             photos={restaurant.photos}
           />
-          <ChangeFateText>Tap here to change your fate </ChangeFateText>
           <TouchableOpacity activeOpacity={1} onPress={handlePress}>
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               <Image
-                source={require("../../../assets/idc2.png")}
-                style={{ width: 200, height: 200 }}
+                source={require("../../../assets/button.png")}
+                style={{ width: 200, height: 200, resizeMode: 'contain' }}
               />
             </View>
           </TouchableOpacity>
