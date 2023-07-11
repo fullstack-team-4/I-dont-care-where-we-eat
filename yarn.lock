@@ -8767,10 +8767,10 @@ react-native-maps@1.3.2:
   dependencies:
     "@types/geojson" "^7946.0.8"
 
-react-native-paper@^5.9.0:
-  version "5.9.0"
-  resolved "https://registry.npmjs.org/react-native-paper/-/react-native-paper-5.9.0.tgz"
-  integrity sha512-yPiZLESdyyipw8o6RAw5yAijcQye2ALMu2tA5ZqXyhIQ0lQNOYTQRnSrcSD+c/Dj/aCpV4utJrcQveBnK7VlFw==
+react-native-paper@^5.9.1:
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.9.1.tgz#e77d8ecda6e41783cf781ead5c2bbcc9ce26f44b"
+  integrity sha512-zsOdKQ+mXxeY+qZDSpizBTFVFrnV4P/84ZgSjTKQjbmPU5MnO1xJtntWVmk7Pba81x5Hbcf3Q1/9VP3LHy1anA==
   dependencies:
     "@callstack/react-theme-provider" "^3.0.8"
     color "^3.1.2"

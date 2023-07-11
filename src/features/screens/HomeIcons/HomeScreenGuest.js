@@ -5,7 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import MapScreen from "../MapScreen";
 import { Provider as PaperProvider } from "react-native-paper";
 import { ThemeProvider } from "styled-components";
-import { View, Text, Button } from "react-native"; 
 
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { HomeScreen } from "../HomeScreen";
@@ -15,24 +14,10 @@ import { GOOGLE_MAPS_API_KEY } from "@env";
 import axios from "axios";
 
 import Logo from "../../homepage/Logo";
+import { SignInScreen } from "../SignInScreen/SignInScreen";
+import { SettingsScreen } from "../Settings/SettingsScreen";
+import { Auth,Hub } from "aws-amplify";
 
-
-import { useNavigation } from "@react-navigation/native";
-
-const SettingsGuest = () => {
-  const navigation = useNavigation();
-  const onSignUpPressed = () => {
-    navigation.navigate("SignUp");
-  };
-  return (
-    <View >
-      <Text >You are a guest</Text>
-      <Button onPress={onSignUpPressed} title="Sign Up" />
-
-      
-    </View>
-  );
-};
 
 const Tab = createBottomTabNavigator();
 
@@ -40,6 +25,7 @@ const TAB_ICON = {
   Restaurants: "md-restaurant",
   Map: "md-map",
   Settings: "md-settings",
+  Profile:"person-circle-outline"
 };
 
 
@@ -64,6 +50,20 @@ const theme = {
 const HomeScreenGuest = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [restaurantData, setRestaurantData] = useState([]);
+  const [user, setUser] = useState(undefined);
+  const checkUser = async () => {
+
+    try{
+      const authUser = await Auth.currentAuthenticatedUser({ bypassCach: true });
+      setUser(authUser)
+    }
+    catch(e){
+      setUser(null)
+
+    }
+
+  };
+
 
   //bring in the results
   const filters = {
@@ -112,6 +112,21 @@ const HomeScreenGuest = () => {
 
   // console.log(userLocation);
 
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+  useEffect(() => {
+    const listener = (data) => {
+      if (data.payload.event === 'signIn' || data.payload.event === 'signOut') {
+        checkUser();
+      }
+    };
+    Hub.listen('auth', listener);
+    return () => Hub.remove('auth', listener);
+  }, []);
+
+
   
   
 
@@ -152,7 +167,7 @@ const HomeScreenGuest = () => {
                 />
               )}
             </Tab.Screen>
-          <Tab.Screen name="Settings" component={SettingsGuest} />
+          <Tab.Screen name="Profile" component={user ? SettingsScreen : SignInScreen}/>
         </Tab.Navigator>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
