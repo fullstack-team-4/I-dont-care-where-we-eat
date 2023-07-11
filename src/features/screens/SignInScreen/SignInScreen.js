@@ -88,10 +88,10 @@ export const SignInScreen = () => {
       />
       <CustomButton text={loading ? "Loading...":"Sign In"}onPress={handleSubmit(onSignInPressed)} />
       
-      <CustomButton 
+      {/* <CustomButton 
       text="Sign In As a Guest "
       onPress={onSignInGuess}
-      type="SECONDARY"/>
+      type="SECONDARY"/> */}
       
       <CustomButton
         text="Forgot Password?"
