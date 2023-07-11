@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-
 import MapScreen from '../MapScreen';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { ThemeProvider } from 'styled-components';
 import { View, Text, Button } from 'react-native';
-
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { HomeScreen } from '../HomeScreen';
-
-import * as Location from 'expo-location';
-import { GOOGLE_MAPS_API_KEY } from '@env';
-import axios from 'axios';
-
 import Logo from '../../homepage/Logo';
-
 import { useNavigation } from '@react-navigation/native';
 
 const SettingsGuest = () => {
@@ -57,7 +49,7 @@ const theme = {
     },
 };
 
-const HomeScreenGuest = ({ userLocation, restaurantData, filters, states }) => {
+const HomeScreenGuest = ({ filters, states }) => {
     return (
         <PaperProvider>
             <ThemeProvider theme={theme}>
@@ -85,25 +77,11 @@ const HomeScreenGuest = ({ userLocation, restaurantData, filters, states }) => {
                             headerTitle: () => <Logo />,
                             headerTitleAlign: 'center',
                         }}>
-                        {() => (
-                            <HomeScreen
-                                userLocation={userLocation}
-                                restaurantData={restaurantData}
-                                filters={filters}
-                                states={states}
-                            />
-                        )}
+                        {() => <HomeScreen filters={filters} states={states} />}
                     </Tab.Screen>
 
                     <Tab.Screen name="Map">
-                        {() => (
-                            <MapScreen
-                                userLocation={userLocation}
-                                restaurantData={restaurantData}
-                                filters={filters}
-                                states={states}
-                            />
-                        )}
+                        {() => <MapScreen filters={filters} states={states} />}
                     </Tab.Screen>
                     <Tab.Screen name="Settings" component={SettingsGuest} />
                 </Tab.Navigator>
