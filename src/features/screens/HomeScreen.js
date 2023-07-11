@@ -72,13 +72,13 @@ export const HomeScreen = ({
         // console.log('selectedRating, HomeScreen.js', selectedRating);
     };
 
-    const filters = {
-        handleDistanceFilter,
-        handleOpenFilter,
-        handleCuisineFilter,
-        handlePriceFilter,
-        handleRatingFilter,
-    };
+    // const filters = {
+    //     handleDistanceFilter,
+    //     handleOpenFilter,
+    //     handleCuisineFilter,
+    //     handlePriceFilter,
+    //     handleRatingFilter,
+    // };
       
 
     useEffect(() => {
