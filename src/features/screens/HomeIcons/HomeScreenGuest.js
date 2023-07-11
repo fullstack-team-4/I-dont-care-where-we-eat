@@ -28,23 +28,22 @@ const TAB_ICON = {
   Profile:"person-circle-outline"
 };
 
-
 const theme = {
-  colors: {
-    primary: "#FF0000",
-    secondary: "#00FF00",
-    background: "#FFFFFF",
-    text: "#000000",
-  },
-  fonts: {
-    regular: "Arial",
-    bold: "Helvetica-Bold",
-  },
-  spacing: {
-    small: 8,
-    medium: 16,
-    large: 24,
-  },
+    colors: {
+        primary: '#FF0000',
+        secondary: '#00FF00',
+        background: '#FFFFFF',
+        text: '#000000',
+    },
+    fonts: {
+        regular: 'Arial',
+        bold: 'Helvetica-Bold',
+    },
+    spacing: {
+        small: 8,
+        medium: 16,
+        large: 24,
+    },
 };
 
 const HomeScreenGuest = () => {
@@ -148,25 +147,17 @@ const HomeScreenGuest = () => {
           })}
         >
           <Tab.Screen
-              name="Restaurants"
-              options={{
-                headerTitle: () => <Logo />,
-                headerTitleAlign: "center",
-              }}
-            >
-              {() => <HomeScreen restaurantData={restaurantData} />}
-            </Tab.Screen>
+                        name="Restaurants"
+                        options={{
+                            headerTitle: () => <Logo />,
+                            headerTitleAlign: 'center',
+                        }}>
+                        {() => <HomeScreen filters={filters} states={states} />}
+                    </Tab.Screen>
 
-
-          <Tab.Screen name="Map">
-              {() => (
-                <MapScreen
-                  userLocation={userLocation}
-                  restaurantData={restaurantData}
-                  filters={filters}
-                />
-              )}
-            </Tab.Screen>
+                    <Tab.Screen name="Map">
+                        {() => <MapScreen filters={filters} states={states} />}
+                    </Tab.Screen>
           <Tab.Screen name="Profile" component={user ? SettingsScreen : SignInScreen}/>
         </Tab.Navigator>
       </ThemeProvider>

@@ -19,11 +19,11 @@ import { Spacer } from '../../components/spacers/spacer.component';
 import SearchInput from '../../features/searchBar/SeachInput';
 import { RestaurantInfoCard } from './RestaurantComponent';
 
-export default function MapScreen({ userLocation, restaurantData, filters }) {
+export default function MapScreen({ states }) {
     // state for user location
-    const [location, setLocation] = useState(userLocation);
+    const [location, setLocation] = useState(states.userLocation);
     // state for restaurants data
-    const [restaurants, setRestaurants] = useState(restaurantData);
+    const [restaurants, setRestaurants] = useState([]);
     // state for loading
     const [loading, setLoading] = useState(false);
     // state for list view
@@ -57,12 +57,16 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
         }
     };
 
+    useEffect(() => {
+        setRestaurants(states.restaurantData);
+    }, [states.restaurantData]);
+
     // Callback function to take in the input from the SearchInput component
     const handleSearch = (query) => {
         setIsFiltered(true);
         prevRestaurantsRef.current = restaurants;
         const apiKey = GOOGLE_MAPS_API_KEY;
-        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${userLocation.latitude},${userLocation.longitude}&radius=${filters.radius}&type=restaurant&key=${apiKey}`;
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${states.userLocation.latitude},${states.userLocation.longitude}&radius=${states.distanceFilter}&type=restaurant&key=${apiKey}`;
 
         axios
             .get(url)
@@ -86,7 +90,7 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
         setListView((prevListView) => !prevListView);
     };
 
-    if (!userLocation || loading) {
+    if (!states.userLocation || loading) {
         return (
             <ActivityIndicator style={styles.loadingContainer} size="large" />
         );
@@ -123,15 +127,17 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                     />
                 </SearchContainer>
                 <RestaurantList
-      data={restaurants}
-      renderItem={({ item }) => {
-    
-        return (
-          <Spacer position="bottom" size="large">
-            <RestaurantInfoCard key={item.place_id} {...item} />
-          </Spacer>
-        );
-      }}
+                    data={restaurants}
+                    renderItem={({ item }) => {
+                        return (
+                            <Spacer position="bottom" size="large">
+                                <RestaurantInfoCard
+                                    key={item.place_id}
+                                    {...item}
+                                />
+                            </Spacer>
+                        );
+                    }}
                     keyExtractor={(item) => item.place_id}
                 />
                 <View style={styles.listViewButton}>
@@ -151,25 +157,25 @@ export default function MapScreen({ userLocation, restaurantData, filters }) {
                     <ActivityIndicator size="large" color="gray" />
                 </View>
             ) : null}
-            {userLocation ? (
+            {states.userLocation ? (
                 <MapView
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
-                    region={userLocation}>
+                    region={states.userLocation}>
                     <Circle
-                        center={userLocation}
-                        radius={filters.radius}
+                        center={states.userLocation}
+                        radius={states.distanceFilter}
                         strokeColor="#0084ff"
                         fillColor="rgba(102,204,255,0.3)"
                         strokeWidth={2}
                     />
                     <Marker
                         title="me"
-                        coordinate={userLocation}
+                        coordinate={states.userLocation}
                         pinColor="#0066ff"
                     />
 
-                    {(isFiltered ? restaurants : restaurantData).map(
+                    {(isFiltered ? restaurants : states.restaurantData).map(
                         (restaurant) => (
                             <Marker
                                 key={restaurant.place_id}
