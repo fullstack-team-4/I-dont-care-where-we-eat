@@ -46,9 +46,7 @@ const theme = {
     },
 };
 
-const HomeScreenGuest = () => {
-  const [userLocation, setUserLocation] = useState(null);
-  const [restaurantData, setRestaurantData] = useState([]);
+const HomeScreenGuest = ({ filters, states }) => {
   const [user, setUser] = useState(undefined);
   const checkUser = async () => {
 
@@ -63,58 +61,10 @@ const HomeScreenGuest = () => {
 
   };
 
-
-  //bring in the results
-  const filters = {
-    radius: 5 * 1609, //dynamically change with distance slider input
-    keywords: null, //dynamically change with cuisine filter
-    rating: null, //dynamically change with rating filter
-    price: null, //dynamically change with price filter
-  };
-
-  // GET USERS LOCATION
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        Alert.alert("Permission to access location was denied");
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = location.coords;
-      setUserLocation({
-        latitude,
-        longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      });
-    })();
-  }, []);
-
-  //MAKE API CALL TO GOOGLE PLACES
-  useEffect(() => {
-    if (userLocation) {
-      const apiKey = GOOGLE_MAPS_API_KEY;
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLocation.latitude},${userLocation.longitude}&radius=${filters.radius}&type=restaurant&key=${apiKey}`;
-
-      axios
-        .get(url)
-        .then((response) => {
-          setRestaurantData(response.data.results);
-        })
-        .catch((error) => {
-          Alert.alert("Error fetching restaurant data:", error);
-        });
-    }
-  }, [userLocation]);
-
-  // console.log(userLocation);
-
-
   useEffect(() => {
     checkUser();
   }, []);
+
   useEffect(() => {
     const listener = (data) => {
       if (data.payload.event === 'signIn' || data.payload.event === 'signOut') {
@@ -164,6 +114,6 @@ const HomeScreenGuest = () => {
       <ExpoStatusBar style="auto" />
     </PaperProvider>
   );
-};
+                      }
 
 export default HomeScreenGuest;

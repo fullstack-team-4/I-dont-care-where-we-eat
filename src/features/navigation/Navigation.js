@@ -13,7 +13,7 @@ import HomeScreenGuest from '../screens/HomeIcons/HomeScreenGuest';
 
 const Stack = createNativeStackNavigator();
 
-export const Navigation = () => {
+export const Navigation = ({filters,states}) => {
   
   return (
     <NavigationContainer>
