@@ -63,7 +63,7 @@ export default function App() {
 
     const handleOpenFilter = (isEnabled) => {
         setIsOpen(!isEnabled);
-        // console.log('isOpen, App.js', isOpen, typeof isOpen);
+        // console.log('isOpen, App.js--->', isOpen, typeof isOpen);
     };
 
     const handleCuisineFilter = (selectedCuisines) => {
@@ -119,6 +119,10 @@ export default function App() {
             });
         })();
     }, []);
+
+    // useEffect(() => {
+    //     console.log('isOpen, App.js--->', isOpen, typeof isOpen);
+    // }, [isOpen]);
 
     //MAKE API CALL TO GOOGLE PLACES
     useEffect(() => {

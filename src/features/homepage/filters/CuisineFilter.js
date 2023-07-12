@@ -41,7 +41,7 @@ const cuisineIcons = {
 
 const CuisineFilter = ({ onFilterApply }) => {
     const [selectedCuisines, setSelectedCuisines] = useState([]);
-
+// console.log("this is selectedCuisines--->", selectCuisine)
     useEffect(() => {
         loadSelectedCuisines();
     }, []);
