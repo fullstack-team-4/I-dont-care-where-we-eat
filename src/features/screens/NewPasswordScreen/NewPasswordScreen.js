@@ -17,17 +17,26 @@ export const NewPasswordScreen = () => {
   const route = useRoute();
   const { username } = route.params; 
 
+  const signOut = async () => {
+    try {
+      await Auth.signOut();
+    } catch (error) {
+      console.log('Error signing out:', error);
+    }
+  };
+
  
 
 
-  const onSignInPressed = () => {
-    navigation.navigate("SignIn");
+  const onSignInPressed = async() => {
+    await signOut(); // Sign out the user
+    navigation.navigate("GuestHome"); // Navigate to the Sign In screen
   };
 
   const onSubmitPressed = async(data) => {
     try{
       await Auth.forgotPasswordSubmit(data.username,data.code, data.password);
-      navigation.navigate("SignIn")
+      navigation.navigate("GuestHome")
 
     }
     catch(e){

@@ -135,7 +135,7 @@ export const SignUpScreen = () => {
       
       <CustomButton
         text="Have an account? Sign in"
-        onPress={onSignInPressed}
+        onPress={onGoBack}
         type="TERTIARY"
       />
     
