@@ -7,7 +7,6 @@ const ButtonContainer = styled(View)`
     flex: 1;
     align-items: center;
     justify-content: flex-start;
-    border-radius: 8px;
     shadow-color: #000;
     shadow-opacity: 0.5;
     shadow-offset: 0px 2px;
