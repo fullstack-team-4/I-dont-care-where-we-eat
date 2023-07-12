@@ -4,7 +4,8 @@ import {
   Image,
   useWindowDimensions,
   StyleSheet,
-  Alert
+  Alert,
+  TouchableOpacity
 } from "react-native";
 import React, { useState } from "react";
 import Logo from "../../../../assets/favicon.png";
@@ -49,8 +50,14 @@ export const SignUpScreen = () => {
     console.warn("OnPrivacyPressed")
 
   }
+  const onGoBack = () => {
+    navigation.goBack();
+  };
   return (
     <View style={styles.root}>
+       <TouchableOpacity onPress={onGoBack} style={styles.goBackButton}>
+        <Text style={styles.goBackText}>Go Back</Text>
+      </TouchableOpacity>
       <Text style={styles.title}> Create an account</Text>
 
       <CustomInput
@@ -128,7 +135,7 @@ export const SignUpScreen = () => {
       
       <CustomButton
         text="Have an account? Sign in"
-        onPress={onSignInPressed}
+        onPress={onGoBack}
         type="TERTIARY"
       />
     
@@ -166,5 +173,10 @@ const styles = StyleSheet.create({
     marginBottom: 
     20,
     textAlign: "center",
+  },
+  goBackText: {
+    fontSize: 16,
+    color: "#051C60",
+    textDecorationLine: "underline",
   },
 });
