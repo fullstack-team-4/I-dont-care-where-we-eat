@@ -6,6 +6,7 @@ import { SvgXml } from "react-native-svg";
 import star from "../../../assets/star";
 import open from "../../../assets/open";
 import { isNotEmittedStatement } from "typescript";
+import { GOOGLE_MAP_API_KEY } from '@env'
 
 const RestaurantCard = styled(Card)`
   background-color: #F96666;
@@ -64,7 +65,7 @@ const LinkIcon = styled(Image)`
 
 export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_hours, vicinity, photos, user_ratings_total }) => {
   const reference = photos[0]?.photo_reference;
-  const apiKey = "AIzaSyB4mhr5mWVDKq3VQrGmloq91Be4KTi9LT8";
+  const apiKey = GOOGLE_MAP_API_KEY;
   let photoUrl = null;
 
   if (reference && apiKey) {
