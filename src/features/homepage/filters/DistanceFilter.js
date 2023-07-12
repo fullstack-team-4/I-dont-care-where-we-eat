@@ -29,7 +29,7 @@ const DistanceFilter = ({ filters }) => {
                 fontSize: 30,
                 color: 'red',
                 flexDirection: 'row',
-                backgroundColor: '#eeeeee',
+                backgroundColor: 'rgba(212, 208, 208, 0.7)',
                 borderRadius: 25,
             }}>{distance} miles</Text>
             <Slider
