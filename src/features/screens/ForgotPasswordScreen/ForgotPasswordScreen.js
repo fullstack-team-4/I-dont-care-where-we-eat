@@ -32,6 +32,9 @@ export const ForgotPasswordScreen = () => {
       Alert.alert("Oops", e.message);
     }
   };
+  const onGoBack = () => {
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -55,7 +58,7 @@ export const ForgotPasswordScreen = () => {
 
         <CustomButton
           text="Back to Sign in"
-          onPress={onSignInPressed}
+          onPress={onGoBack}
           type="TERTIARY"
         />
       </View>
