@@ -9,13 +9,15 @@ import { isNotEmittedStatement } from "typescript";
 import { GOOGLE_MAPS_API_KEY } from '@env'
 
 const RestaurantCard = styled(Card)`
-  background-color: #F96666;
-  margin-bottom: 16px;
+    background-color: white;
+    margin-bottom: 16px;
+    min-width: 100%;
+    margin-horizontal: 20px;
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
   padding: 16px;
-  background-color: #F96666;
+  background-color: white;
 `;
 
 const Address = styled(Text)`
@@ -66,6 +68,8 @@ const LinkIcon = styled(Image)`
 `;
 
 export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_hours, vicinity, photos, user_ratings_total }) => {
+  if (!photos ) return
+
   const reference = photos[0]?.photo_reference;
   const apiKey = GOOGLE_MAPS_API_KEY;
   let photoUrl = null;
@@ -103,20 +107,22 @@ export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_
             {rating} ({user_ratings_total})
           </Text>
           <SectionEnd>
-            {open_now && (
+            {open_now ?  (
               <SvgXml xml={open} width={30} height={25} />
-            )}
+            ) :  <Text variant="label" style={{ color: 'red', }}>
+            CLOSED
+          </Text> }
           </SectionEnd>
         </Section>
         <Address>
           <View
             style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text>{vicinity}</Text>
-            {!open_now && (
-              <Text variant="label" style={{ color: 'red' }}>
+            {/* {!open_now && (
+              <Text variant="label" style={{ color: 'red', }}>
                 CLOSED
               </Text>
-            )}
+            )} */}
           </View>
           {/* <TouchableOpacity onPress={openPhoneNumber}>
             <LinkIcon source={require("../../../assets/phone.webp")} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Linking, TouchableOpacity, ScrollView, ImageBackground, StyleSheet } from 'react-native';
 import { Auth } from 'aws-amplify';
 
-const backgroundImage = require('../../../../assets/home-backg.avif');
+const backgroundImage = require('../../../../assets/home-bg2.jpeg');
 
 export const SettingsScreen = () => {
   const [username, setUsername] = useState('');
@@ -63,7 +63,7 @@ export const SettingsScreen = () => {
           Welcome, {username}
         </Text>
         <Text style={styles.heading}>
-          App Developers
+          App Devs
         </Text>
 
         <View style={styles.profilesContainer}>
@@ -100,57 +100,66 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 30,
     alignSelf: 'center',
-    fontWeight: 'bold',
+    fontWeight: 'black',
     marginVertical: 70,
-    textShadowColor: 'gold',
     textShadowOffset: { width: 2, height: 2 },
-    textDecorationLine: 'underline',
     textShadowRadius: 6,
     textDecorationStyle: 'solid',
-    color: 'white',
+    color: 'black',
+    backgroundColor: 'white', 
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 15,
+    borderWidth: 4,
   },
   heading: {
     fontSize: 24,
     textAlign: 'center',
-    fontWeight: 'bold',
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 2,
-    textDecorationLine: 'underline',
     marginVertical: 20,
-    textShadowColor: 'gold',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 6,
-    textDecorationLine: 'underline',
-    color: 'white',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 12,
+    color: 'black',
+    backgroundColor: 'white',
+    borderWidth: 4,
+    borderRadius: 15,
   },
   profilesContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   profileButton: {
-    backgroundColor: 'grey',
+    backgroundColor: 'red',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
     marginVertical: 5,
+    borderWidth: 4,
   },
   profileButtonText: {
     color: 'white',
   },
   signOutButton: {
-    width: '100%',
+    width: '50%',
+    marginLeft: '25%',
     textAlign: 'center',
-    color: 'red',
     marginVertical: 100,
     fontSize: 30,
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 1,
-    textDecorationLine: 'underline',
+
+    
   },
+  // sign button
   signOutButtonText: {
-    color: 'white',
+    color: 'red',
     textAlign: 'center',
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderWidth: 4,
+    borderRadius: 15,
+    
   },
 });

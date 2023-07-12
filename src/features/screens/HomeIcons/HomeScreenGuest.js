@@ -99,7 +99,6 @@ const HomeScreenGuest = ({ filters, states }) => {
           <Tab.Screen
                         name="Restaurants"
                         options={{
-                            headerTitle: () => <Logo />,
                             headerTitleAlign: 'center',
                         }}>
                         {() => <HomeScreen filters={filters} states={states} />}

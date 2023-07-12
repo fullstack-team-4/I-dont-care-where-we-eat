@@ -29,8 +29,13 @@ const DistanceFilter = ({ filters }) => {
                 fontSize: 30,
                 color: 'red',
                 flexDirection: 'row',
-                backgroundColor: 'rgba(212, 208, 208, 0.7)',
-                borderRadius: 25,
+                backgroundColor: 'white',
+                borderWidth: 1,
+                borderRadius: 15,
+                paddingHorizontal: 15,
+                alignSelf: 'center'
+
+
             }}>{distance} miles</Text>
             <Slider
                 minimumValue={1}
@@ -39,8 +44,10 @@ const DistanceFilter = ({ filters }) => {
                 value={distance}
                 onSlidingComplete={applyDistanceFilter}
                 onValueChange={handleDistanceFilter}
-
+                thumbTintColor="red" 
+                maximumTrackTintColor='grey'
             />
+
         </View>
     );
 };
