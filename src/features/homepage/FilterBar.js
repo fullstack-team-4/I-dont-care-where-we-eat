@@ -125,9 +125,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     marginBottom: 10,
-    backgroundColor: "#eeeeee",
     height: 50,
-    borderRadius: 25,
   },
 
   filterButton: {
@@ -138,6 +136,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "gray",
+    minHeight: '90%'
   },
   filterText: {
     marginRight: 5,

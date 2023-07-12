@@ -8,10 +8,13 @@ const ButtonContainer = styled(View)`
     align-items: center;
     justify-content: flex-start;
     shadow-color: #000;
-    shadow-opacity: 0.5;
+    shadow-opacity: 1;
     shadow-offset: 0px 2px;
     shadow-radius: 4px;
     elevation: 2;
+    margin-top: 15px;
+    max-height: 95%;
+    position: relative;
 `;
 
 
@@ -45,10 +48,10 @@ const RandomButton = ({ states }) => {
             vicinity={restaurant.vicinity}
             photos={restaurant.photos}
           />
-          <TouchableOpacity activeOpacity={1} onPress={handlePress}>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+           <TouchableOpacity activeOpacity={1} onPress={handlePress}>
+            <View style={{ position: 'relative', marginLeft: 100, bottom: 20}}>
               <Image
-                source={require("../../../assets/button.png")}
+                source={require("../../../assets/button-2.png")}
                 style={{ width: 200, height: 200, resizeMode: 'contain' }}
               />
             </View>

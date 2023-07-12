@@ -72,6 +72,7 @@ export default function MapScreen({ states }) {
             .get(url)
             .then((response) => {
                 // console.log(response);
+                if (response.data.results.length == 0) {Alert.alert('no results')}
                 setRestaurants(response.data.results);
             })
             .catch((error) => {
@@ -82,7 +83,7 @@ export default function MapScreen({ states }) {
     const resetSearch = () => {
         setSearchResults([]);
         setIsFiltered(false);
-        setRestaurants(prevRestaurantsRef.current);
+        setRestaurants(states.restaurantData);
     };
 
     // CHANGE STATE FROM MAP VIEW TO LIST VIEW
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
-        padding: 10,
+        padding: 5,
         shadowColor: 'rgba(0, 0, 0, 0.3)',
         shadowOpacity: 0.5,
         shadowRadius: 3,
@@ -248,7 +249,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
-        padding: 10,
+        padding: 5,
         shadowColor: 'rgba(0, 0, 0, 0.3)',
         shadowOpacity: 0.5,
         shadowRadius: 3,
@@ -265,7 +266,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#99ccff',
         borderRadius: 10,
-        padding: 10,
+        padding: 5,
         shadowColor: 'rgba(0, 0, 0, 0.3)',
         shadowOpacity: 0.5,
         shadowRadius: 3,
