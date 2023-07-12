@@ -4,40 +4,38 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import {
   CuisineFilter,
-  OpenFilter,
   PriceFilter,
   RatingFilter,
 } from "./filters";
 
 const FilterBar = ({
   filters,
-  handleFilterChange,
-  isCuisineFilterApplied,
-  isPriceFilterApplied,
-  isRatingFilterApplied,
+  states,
 }) => {
-  const refRBsheetOpen = useRef();
+
   const refRBsheetCuisine = useRef();
   const refRBsheetPrice = useRef();
   const refRBsheetRating = useRef();
-  // const refRBsheetDistance = useRef();
-
+  
+  const handleOpenFilter = () => {
+    filters.handleOpenFilter(states.isOpen);
+  };
   return (
     <View>
       <View style={styles.filterBar}>
         <TouchableOpacity
-          style={styles.filterButton}
-          onPress={() => {
-            filters.handleFilterChange("open");
-            refRBsheetOpen.current.open();
-          }}
+          style={[
+            styles.filterButton,
+            states.isOpen ? styles.appliedFilter : null,
+          ]}
+          onPress={handleOpenFilter}
         >
           <Text>Open</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.filterButton,
-            isCuisineFilterApplied ? styles.appliedFilter : null,
+            states.cuisineFilters.length > 0 ? styles.appliedFilter : null,
           ]}
           onPress={() => {
             filters.handleFilterChange("cuisine");
@@ -50,7 +48,7 @@ const FilterBar = ({
         <TouchableOpacity
           style={[
             styles.filterButton,
-            isPriceFilterApplied ? styles.appliedFilter : null,
+            states.priceFilters ? styles.appliedFilter : null,
           ]}
           onPress={() => {
             filters.handleFilterChange("price");
@@ -63,7 +61,7 @@ const FilterBar = ({
         <TouchableOpacity
           style={[
             styles.filterButton,
-            isRatingFilterApplied ? styles.appliedFilter : null,
+            states.ratingFilter ? styles.appliedFilter : null,
           ]}
           onPress={() => {
             filters.handleFilterChange("rating");
@@ -75,20 +73,7 @@ const FilterBar = ({
         </TouchableOpacity>
       </View>
 
-      <RBSheet
-        ref={refRBsheetOpen}
-        closeOnDragDown={true}
-        height={250}
-        customStyles={{
-          container: {
-            justifyContent: "center",
-            alignItems: "center",
-          },
-        }}
-      >
-        <OpenFilter onFilterApply={filters.handleOpenFilter} />
-      </RBSheet>
-
+     
       <RBSheet
         ref={refRBsheetCuisine}
         closeOnDragDown={true}
