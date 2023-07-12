@@ -21,7 +21,7 @@ export const HomeScreen = ({ filters, states }) => {
     return (
         <SafeArea>
             <ImageBackground
-    source={require('../../../assets/home-backg.avif')}
+    source={require('../../../assets/home-bg2.jpeg')}
     style={styles.backgroundImage}
   >
             <ScrollView>

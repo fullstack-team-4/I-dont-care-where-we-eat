@@ -6,7 +6,7 @@ import { SvgXml } from "react-native-svg";
 import star from "../../../assets/star";
 import open from "../../../assets/open";
 import { isNotEmittedStatement } from "typescript";
-import { GOOGLE_MAP_API_KEY } from '@env'
+import { GOOGLE_MAPS_API_KEY } from '@env'
 
 const RestaurantCard = styled(Card)`
   background-color: #F96666;
@@ -52,10 +52,12 @@ const SectionEnd = styled.View`
   justify-content: flex-end;
 `;
 
-// const RowContainer = styled(View)`
-//   flex-direction: row;
-//   align-items: center;
-// `;
+const PlaceholderImage = () => (
+  <Image
+    source={require('../../../assets/IDC_Logo.png')}
+    style={{ width: 300, height: 300 }}
+  />
+);
 
 const LinkIcon = styled(Image)`
   width: 30px;
@@ -65,7 +67,7 @@ const LinkIcon = styled(Image)`
 
 export const RestaurantInfoCard = ({ name, rating, isClosedTemporarily, opening_hours, vicinity, photos, user_ratings_total }) => {
   const reference = photos[0]?.photo_reference;
-  const apiKey = GOOGLE_MAP_API_KEY;
+  const apiKey = GOOGLE_MAPS_API_KEY;
   let photoUrl = null;
 
   if (reference && apiKey) {
