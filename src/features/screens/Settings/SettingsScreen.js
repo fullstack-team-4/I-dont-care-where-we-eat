@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Linking, TouchableOpacity } from 'react-native';
+import { View, Text, Linking, TouchableOpacity, ScrollView } from 'react-native';
 import { Auth } from 'aws-amplify';
 
 export const SettingsScreen = () => {
@@ -38,6 +38,7 @@ export const SettingsScreen = () => {
     {
       name: 'Skyler Morton',
       url: 'https://www.linkedin.com/in/skyleramorton',
+
     },
   ];
 
@@ -54,36 +55,75 @@ export const SettingsScreen = () => {
   };
 
   return (
-    <View>
-      <Text style={{ fontSize: 24 }}>Home, Sweet Home</Text>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Text style={{
+          fontSize: 30,
+          alignSelf: 'center',
+          fontWeight: 'bold',
+          marginVertical: 70,
+          textShadowColor: 'gold',
+          textShadowOffset: { width: 2, height: 2 },
+          textDecorationLine: 'underline',
+          textShadowRadius: 6,
+          textDecorationStyle: 'solid', // Added to ensure underline is solid
+        }}>
+          Welcome, {username}
+        </Text>
+        <Text
+          style={{
+            fontSize: 24,
+            textAlign: 'center',
+            fontWeight: 'bold',
+            textShadowColor: 'rgba(0, 0, 0, 0.5)',
+            textShadowOffset: { width: 2, height: 2 },
+            textShadowRadius: 2,
+            textDecorationLine: 'underline',
+            marginVertical: 20,
+            textShadowColor: 'gold',
+            textShadowOffset: { width: 2, height: 2 },
+            textShadowRadius: 6,
+            textDecorationLine: 'underline'
+          }}
+        >
+          App Developers
+        </Text>
 
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        {linkedInProfiles.map((profile, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => openLinkedInProfile(profile.url)}
-          >
-            <Text style={{ marginVertical: 5 }}>{profile.name}</Text>
-          </TouchableOpacity>
-        ))}
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          {linkedInProfiles.map((profile, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => openLinkedInProfile(profile.url)}
+              style={{
+                backgroundColor: 'grey',
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 5,
+                marginVertical: 5,
+              }}
+            >
+              <Text style={{ color: 'white' }}>{profile.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <Text
+          onPress={signOut}
+          style={{
+            width: '100%',
+            textAlign: 'center',
+            color: 'red',
+            marginVertical: 100,
+            fontSize: 30,
+            textShadowColor: 'rgba(0, 0, 0, 0.5)',
+            textShadowOffset: { width: 2, height: 2 },
+            textShadowRadius: 1,
+            textDecorationLine: 'underline'
+          }}
+        >
+          Sign Out
+        </Text>
       </View>
-
-      <Text style={{ fontSize: 24, alignSelf: 'center' }}>
-        Welcome, {username}
-      </Text>
-      <Text
-        onPress={signOut}
-        style={{
-          width: '100%',
-          textAlign: 'center',
-          color: 'red',
-          marginTop: 'auto',
-          marginVertical: 20,
-          fontSize: 20,
-        }}
-      >
-        Sign Out
-      </Text>
-    </View>
+    </ScrollView>
   );
 };
