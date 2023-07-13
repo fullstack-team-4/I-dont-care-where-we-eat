@@ -18,6 +18,8 @@ const SearchInput = ({ onSearch }) => {
             placeholder="Search"
             onChangeText={onChangeSearch}
             onIconPress={onSubmitSearch} // Call the onSearch callback when the search icon is pressed
+            iconColor={'tomato'}
+            elevation={2}
             onSubmitEditing={onSubmitSearch} // Call the onSearch callback when search button is pressed on keyboard
             value={searchQuery}
             clearTextOnFocus
