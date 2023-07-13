@@ -49,18 +49,18 @@ const RandomButton = ({ states }) => {
 
   return (
     <ButtonContainer>
-       {isLoading ? (
-        <LoadingContainer>
-          <ActivityIndicator size="large" color="#000000" />
-        </LoadingContainer>
-
-        /* {isLoading ? (
+    {/* //    {isLoading ? ( 
+    //     <LoadingContainer>
+    //       <ActivityIndicator size="large" color="#000000" />
+    //     </LoadingContainer>
+*/}
+        {isLoading ? (
           <LottieView
             source={require('../../../assets/animation.json')}
             autoPlay
             loop
-            style={{ width: 200, height: 200 }}
-          /> */
+            style={{ width: 200, height: 200, marginTop: '20%' }}
+          /> 
       ) : restaurant ? (
         <View>
           <RestaurantInfoCard
