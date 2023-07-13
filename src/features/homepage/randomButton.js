@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Image, Text, View } from 'react-native';
+import { TouchableOpacity, Image, Text, View, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import { RestaurantInfoCard } from '../screens/RestaurantComponent';
+import LottieView from 'lottie-react-native';
 
 const ButtonContainer = styled(View)`
     flex: 1;
@@ -17,16 +18,27 @@ const ButtonContainer = styled(View)`
     position: relative;
 `;
 
+const LoadingContainer = styled(View)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 const RandomButton = ({ states }) => {
   const [restaurant, setRandomRestaurant] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const generateRandomRestaurant = () => {
     if (states.restaurantData.length > 0) {
+      setIsLoading(true);
       const randomIndex = Math.floor(
         Math.random() * states.restaurantData.length
       );
       const randomRestaurant = states.restaurantData[randomIndex];
-      setRandomRestaurant(randomRestaurant);
+      setTimeout(() => {
+        setRandomRestaurant(randomRestaurant);
+        setIsLoading(false);
+      }, 2000);
     }
   };
 
@@ -37,7 +49,19 @@ const RandomButton = ({ states }) => {
 
   return (
     <ButtonContainer>
-      {restaurant ? (
+       {isLoading ? (
+        <LoadingContainer>
+          <ActivityIndicator size="large" color="#000000" />
+        </LoadingContainer>
+
+        /* {isLoading ? (
+          <LottieView
+            source={require('../../../assets/animation.json')}
+            autoPlay
+            loop
+            style={{ width: 200, height: 200 }}
+          /> */
+      ) : restaurant ? (
         <View>
           <RestaurantInfoCard
             name={restaurant.name}
@@ -48,8 +72,8 @@ const RandomButton = ({ states }) => {
             vicinity={restaurant.vicinity}
             photos={restaurant.photos}
           />
-           <TouchableOpacity activeOpacity={1} onPress={handlePress}>
-            <View style={{ position: 'relative', marginLeft: 100, bottom: 20}}>
+          <TouchableOpacity activeOpacity={1} onPress={handlePress}>
+            <View style={{ position: 'relative', marginLeft: 100, bottom: 20 }}>
               <Image
                 source={require("../../../assets/button-2.png")}
                 style={{ width: 200, height: 200, resizeMode: 'contain' }}

@@ -8,6 +8,7 @@ import open from '../../../assets/open';
 import { isNotEmittedStatement } from 'typescript';
 import { GOOGLE_MAPS_API_KEY } from '@env';
 
+
 const RestaurantCard = styled(Card)`
     background-color: white;
     margin-bottom: 16px;

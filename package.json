@@ -36,6 +36,7 @@
     "expo-google-fonts": "^0.0.0",
     "expo-location": "~15.1.1",
     "expo-status-bar": "~1.4.4",
+    "lottie-react-native": "^5.1.6",
     "metro-core": "^0.76.7",
     "react": "18.2.0",
     "react-hook-form": "^7.45.1",
