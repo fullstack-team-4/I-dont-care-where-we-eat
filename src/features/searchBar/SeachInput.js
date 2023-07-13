@@ -5,6 +5,7 @@ const SearchInput = ({ onSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const onChangeSearch = (query) => {
+        // console.log(query); //this returns every key as I type
         setSearchQuery(query);
     };
 
@@ -17,6 +18,7 @@ const SearchInput = ({ onSearch }) => {
             placeholder="Search"
             onChangeText={onChangeSearch}
             onIconPress={onSubmitSearch} // Call the onSearch callback when the search icon is pressed
+            onSubmitEditing={onSubmitSearch} // Call the onSearch callback when search button is pressed on keyboard
             value={searchQuery}
             clearTextOnFocus
         />

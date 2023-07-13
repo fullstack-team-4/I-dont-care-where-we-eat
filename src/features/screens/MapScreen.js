@@ -66,13 +66,15 @@ export default function MapScreen({ states }) {
         setIsFiltered(true);
         prevRestaurantsRef.current = restaurants;
         const apiKey = GOOGLE_MAPS_API_KEY;
-        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${states.userLocation.latitude},${states.userLocation.longitude}&radius=${states.distanceFilter}&type=restaurant&key=${apiKey}`;
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${query}&location=${states.userLocation.latitude},${states.userLocation.longitude}&radius=${states.distanceFilter}&type=restaurant&keyword=restaurant&key=${apiKey}`;
 
         axios
             .get(url)
             .then((response) => {
                 // console.log(response);
-                if (response.data.results.length == 0) {Alert.alert('no results')}
+                if (response.data.results.length == 0) {
+                    Alert.alert('No Results');
+                }
                 setRestaurants(response.data.results);
             })
             .catch((error) => {
@@ -90,6 +92,10 @@ export default function MapScreen({ states }) {
     const handleListView = () => {
         setListView((prevListView) => !prevListView);
     };
+
+    const displayedRestaurants = isFiltered
+        ? restaurants
+        : states.restaurantData;
 
     if (!states.userLocation || loading) {
         return (
@@ -128,7 +134,7 @@ export default function MapScreen({ states }) {
                     />
                 </SearchContainer>
                 <RestaurantList
-                    data={restaurants}
+                    data={displayedRestaurants}
                     renderItem={({ item }) => {
                         return (
                             <Spacer position="bottom" size="large">
@@ -176,19 +182,17 @@ export default function MapScreen({ states }) {
                         pinColor="#0066ff"
                     />
 
-                    {(isFiltered ? restaurants : states.restaurantData).map(
-                        (restaurant) => (
-                            <Marker
-                                key={restaurant.place_id}
-                                coordinate={{
-                                    latitude: restaurant.geometry.location.lat,
-                                    longitude: restaurant.geometry.location.lng,
-                                }}
-                                title={restaurant.name}
-                                description={restaurant.vicinity}
-                            />
-                        )
-                    )}
+                    {displayedRestaurants.map((restaurant) => (
+                        <Marker
+                            key={restaurant.place_id}
+                            coordinate={{
+                                latitude: restaurant.geometry.location.lat,
+                                longitude: restaurant.geometry.location.lng,
+                            }}
+                            title={restaurant.name}
+                            description={restaurant.vicinity}
+                        />
+                    ))}
                 </MapView>
             ) : null}
 
