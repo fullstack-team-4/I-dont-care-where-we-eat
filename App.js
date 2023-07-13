@@ -129,7 +129,7 @@ export default function App() {
         if (userLocation) {
             const apiKey = GOOGLE_MAPS_API_KEY;
 
-            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${cuisineFilters}&location=${userLocation.latitude},${userLocation.longitude}&maxprice=${priceFilters}&opennow=${isOpen}&radius=${distanceFilter}&type=restaurant&key=${apiKey}`;
+            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${cuisineFilters}&location=${userLocation.latitude},${userLocation.longitude}&maxprice=${priceFilters}&opennow=${isOpen}&radius=${distanceFilter}&type=restaurant&keyword=restaurant&key=${apiKey}`;
 
             axios
                 .get(url)
