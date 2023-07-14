@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   appliedFilter: {
-    borderColor: "maroon",
-    backgroundColor: "rgba(128, 0, 0, 0.3)",
+    borderColor: "black",
+    backgroundColor: "tomato",
     borderWidth: 1,
   },
 });
