@@ -15,7 +15,6 @@ npm install react-native-dotenv --save-dev
 npm install axios
 
 Android Link
-https://qr.expo.dev/eas-update?updateId=5d07ca63-5c72-41e9-ba7b-7e8a39cc0849&appScheme=exp&host=u.expo.dev
-
+https://rb.gy/biyqb
 Ios Link
-https://qr.expo.dev/eas-update?updateId=44c72237-67c3-4341-a1d7-b521d4871d3c&appScheme=exp&host=u.expo.dev
+https://rb.gy/udx8g
