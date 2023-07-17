@@ -76,7 +76,7 @@ export const RestaurantInfoCard = ({
     photos,
     user_ratings_total,
 }) => {
-    if (!photos) return null;
+    if (!photos) return PlaceholderImage;
 
     const reference = photos[0]?.photo_reference;
     const apiKey = GOOGLE_MAPS_API_KEY;

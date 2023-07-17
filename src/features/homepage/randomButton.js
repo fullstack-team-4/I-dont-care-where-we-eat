@@ -3,6 +3,8 @@ import { TouchableOpacity, Image, Text, View, ActivityIndicator } from 'react-na
 import styled from 'styled-components/native';
 import { RestaurantInfoCard } from '../screens/RestaurantComponent';
 import LottieView from 'lottie-react-native';
+import { Platform } from 'react-native';
+
 
 const ButtonContainer = styled(View)`
     flex: 1;
@@ -46,22 +48,23 @@ const RandomButton = ({ states }) => {
     console.log('Choosing fate');
     generateRandomRestaurant();
   };
-
+  
   return (
     <ButtonContainer>
-    {/* //    {isLoading ? ( 
-    //     <LoadingContainer>
-    //       <ActivityIndicator size="large" color="#000000" />
-    //     </LoadingContainer>
-*/}
-        {isLoading ? (
-          <LottieView
-            source={require('../../../assets/animation.json')}
-            autoPlay
-            loop
-            style={{ width: 200, height: 200, marginTop: '20%' }}
-          /> 
-      ) : restaurant ? (
+    {isLoading ? (
+    Platform.OS === 'ios' ? (
+      <LottieView
+        source={require('../../../assets/animation.json')}
+        autoPlay
+        loop
+        style={{ width: 200, height: 200, marginTop: '20%' }}
+      /> 
+    ) : (
+      <LoadingContainer>
+        <ActivityIndicator size="large" color="#000000" />
+      </LoadingContainer>
+    )
+) : restaurant ? (
         <View>
           <RestaurantInfoCard
             name={restaurant.name}

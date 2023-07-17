@@ -137,12 +137,10 @@ export default function MapScreen({ states }) {
                     data={displayedRestaurants}
                     renderItem={({ item }) => {
                         return (
-                            <Spacer position="bottom" size="large">
-                                <RestaurantInfoCard
-                                    key={item.place_id}
-                                    {...item}
-                                />
-                            </Spacer>
+                            <RestaurantInfoCard
+                                key={item.place_id}
+                                {...item}
+                            />
                         );
                     }}
                     keyExtractor={(item) => item.place_id}

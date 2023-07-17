@@ -11,7 +11,7 @@ const PriceFilter = ({ onFilterApply }) => {
   };
 
   const [selectedPrice, setSelectedPrice] = useState(null);
-  console.log("this is selectedPrice--->", selectedPrice);
+  // console.log("this is selectedPrice--->", selectedPrice);
   useEffect(() => {
     loadSelectedPrice();
   }, []);
